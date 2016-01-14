@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 
 // ~~~~~~~~~~SCHEMA~~~~~~~~~~~~~ //
-var userSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
   firstName: {type:String},
   lastName: {type:String},
   birthday: {type:Date},
@@ -42,4 +42,4 @@ UserSchema.methods.setToken = function(callback){
 
 
 // ~~~~~~~~~~EXPORTS~~~~~~~~~~~~~ //
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);

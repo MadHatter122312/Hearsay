@@ -11,7 +11,7 @@ var app = express();
 app.set('view engine', 'ejs');
 
 // Connect Mongoose to MongoDB
-var mongoPath = 'mongodb://locahost/hearsays';
+var mongoPath = 'mongodb://localhost/hearsays';
 mongoose.connect(mongoPath);
 
 
@@ -28,14 +28,17 @@ app.use(function(req, res, next){
 // ~~~~~~~~~~IMPORT ROUTER~~~~~~~~~~~~~ //
 var indexRouter = require('./routes/index');
 var hearsaysRouter = require('./routes/api/hearsays');
-var users = require('./routes/users');
+var usersRouter = require('./routes/users');
+var loadUser = require('./middleware/loadUser');
 
 // ~~~~~~~~~~MAP ROUTER~~~~~~~~~~~~~ //
 app.use('/', indexRouter);
 app.use('/api/hearsays', hearsaysRouter);
-app.use('/api/users', users);
+app.use('/api/users', usersRouter);
+app.use(loadUser);
 
 // ~~~~~~~~~~LISTENER~~~~~~~~~~~~~ //
-app.listen(3000, function(){
-  console.log('.... Listening on 3000');
+var port = 8080;
+app.listen(port, function() {
+  console.log('Listening on '+ port);
 });
