@@ -1,0 +1,15 @@
+
+
+Modules
+"bcrypt": "^0.8.5",
+"bcryptjs": "^2.3.0",
+"body-parser": "^1.14.2",
+"cookie-parser": "^1.4.1",
+"crypto": "0.0.3",
+"dotenv": "^1.2.0",
+"ejs": "^2.3.4",
+"express": "^4.13.3",
+"kerberos": "0.0.17",
+"mongoose": "^4.3.5",
+"morgan": "^1.6.1",
+"request": "^2.67.0"
