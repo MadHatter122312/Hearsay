@@ -4,11 +4,7 @@ var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 
 // ~~~~~~~~~~SCHEMA~~~~~~~~~~~~~ //
-<<<<<<< HEAD
 var UserSchema = mongoose.Schema({
-=======
-var userSchema = mongoose.Schema({
->>>>>>> master
   firstName: {type:String},
   lastName: {type:String},
   birthday: {type:Date},
@@ -46,8 +42,4 @@ UserSchema.methods.setToken = function(callback){
 
 
 // ~~~~~~~~~~EXPORTS~~~~~~~~~~~~~ //
-<<<<<<< HEAD
 module.exports = mongoose.model('User', UserSchema);
-=======
-module.exports = mongoose.model('User', userSchema);
->>>>>>> master

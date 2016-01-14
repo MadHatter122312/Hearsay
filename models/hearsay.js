@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 // Setup schema for database
 
 // Comment Schema
-<<<<<<< HEAD
 var CommentSchema = mongoose.Schema({
   body: {type:String},
   username: {type:String}
@@ -17,7 +16,6 @@ var HearsaySchema = mongoose.Schema({
 
 // Export module
 module.exports = mongoose.model('Hearsay', HearsaySchema);
-=======
 var commentSchema = mongoose.Schema({
   content: {type:String},
   username: {type:String}
@@ -29,5 +27,4 @@ var hearsaySchema = mongoose.Schema({
 }, {timestamps:true});
 
 // Export module
-module.exports = mongoose.model('Hearsay', hearsaySchema);
->>>>>>> master
+module.exports = mongoose.model('Hearsay', HearsaySchema);

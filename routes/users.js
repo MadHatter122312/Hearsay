@@ -1,10 +1,7 @@
 // ~~~~~~~~~~MODULES~~~~~~~~~~~~~ //
 var express = require('express');
 var router = express.Router();
-<<<<<<< HEAD
 var User = require('../models/user');
-=======
->>>>>>> master
 
 // ~~~~~~~~~~GET ROUTE~~~~~~~~~~~~~ //
 router.get('/',function(req, res){
