@@ -3,19 +3,19 @@ var express = require('express');
 var router = express.Router();
 
 // Require instance of model
-var Hearsays = require('../../models/hearsay');
+var Hearsay = require('../../models/hearsay');
 
 // GET
 router.get('/', function(req, res){
-  Hearsays.find({}, function(err, dbHearsays){
+  Hearsay.find({}, function(err, dbHearsays){
     if(err){ };
-    res.json({ hearsay: dbHearsays});
+    res.json({ hearsays: dbHearsays});
   });
 });
 
 // GET ONLY ONE
 router.get('/:id', function(req, res, next){
-  Hearsays.findById( req.params.id, function(err, dbHearsay){
+  Hearsay.findById( req.params.id, function(err, dbHearsay){
     if(err) {};
     res.json(dbHearsay);
   });
@@ -24,22 +24,35 @@ router.get('/:id', function(req, res, next){
 // POST
 router.post('/', function(req, res, next){
   console.log('creating');
-  Hearsays.create(req.body.hearsay, function(err, hearsay){
+  Hearsay.create(req.body.hearsay, function(err, hearsay){
     res.json(hearsay);
+  });
+});
+
+router.post('/:id/comments', function(req, res){
+  var commentBody = req.body.comment;
+  commentBody.username = req.user.username; //
+  var hearsayID = req.params.id;
+  Hearsay.findById(hearsayID, function(err, databaseHearsay){
+    var commentNumber = databaseHearsay.comment.push(commentBody);
+    databaseHearsay.save(function(err){
+      // Just cause I wanted to send back the comment....
+      res.json({comment: databaseHearsay.comment[commentNumber-1]});
+    });
   });
 });
 
 // PUT
 router.put('/:id', function(req, res){
   console.log('updating');
-  Hearsays.findByIdAndUpdate(req.params.id, req.body.hearsay, {new:true}, function(err, hearsay){
+  Hearsay.findByIdAndUpdate(req.params.id, req.body.hearsay, {new:true}, function(err, hearsay){
     res.json(hearsay);
   });
 });
 
 // DELETE
 router.delete('/:id', function(req, res){
-  Hearsays.findByIdAndRemove(req.params.id, function(err){
+  Hearsay.findByIdAndRemove(req.params.id, function(err){
     if(err){ res.status(500).end(); };
     res.status(204).end();
   });
