@@ -29,11 +29,13 @@ app.use(function(req, res, next){
 var indexRouter = require('./routes/index');
 var hearsaysRouter = require('./routes/api/hearsays');
 var usersRouter = require('./routes/users');
+var loadUser = require('./middleware/loadUser');
 
 // ~~~~~~~~~~MAP ROUTER~~~~~~~~~~~~~ //
 app.use('/', indexRouter);
 app.use('/api/hearsays', hearsaysRouter);
 app.use('/api/users', usersRouter);
+app.use(loadUser);
 
 // ~~~~~~~~~~LISTENER~~~~~~~~~~~~~ //
 var port = 8080;
