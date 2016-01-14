@@ -11,11 +11,7 @@ var app = express();
 app.set('view engine', 'ejs');
 
 // Connect Mongoose to MongoDB
-<<<<<<< HEAD
 var mongoPath = 'mongodb://localhost/hearsays';
-=======
-var mongoPath = 'mongodb://locahost/hearsays';
->>>>>>> master
 mongoose.connect(mongoPath);
 
 
