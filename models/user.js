@@ -16,9 +16,9 @@ var UserSchema = mongoose.Schema({
 }, {timestamps:true});
 
 // ~~~~~~~~~~METHODS~~~~~~~~~~~~~ //
-UserSchema.pre('save', function(next){
-  if(this.isModified('password')){
-    this.password = bcrypt.hashSync(this.password, 10);
+UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens
+  if(this.isModified('password')){ // If the password has changed
+    this.password = bcrypt.hashSync(this.password, 10); // Has the password
   }
   next();
 });

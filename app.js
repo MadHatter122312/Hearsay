@@ -39,7 +39,7 @@ app.use('/api/hearsays', hearsaysRouter);
 app.use('/api/users', usersRouter);
 
 // ~~~~~~~~~~LISTENER~~~~~~~~~~~~~ //
-var port = 8080;
+var port = process.env.PORT || 8080;
 app.listen(port, function() {
   console.log('Listening on '+ port);
 });
