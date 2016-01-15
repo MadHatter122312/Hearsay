@@ -14,7 +14,11 @@ function loadUser(req, res, next){
   } else {
     next();
   }
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> fc275e0d284df49ca66bf4e3f9a66d3811aaf1b7
 
 // ~~~~~~~~~~EXPORTS~~~~~~~~~~~~~ //
 module.exports = loadUser;
