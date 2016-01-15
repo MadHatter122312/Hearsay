@@ -20,7 +20,7 @@ UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens
   if(this.isModified('password')){ // If the password has changed
     this.password = bcrypt.hashSync(this.password, 10); // Has the password
   }
-  next();
+  return next();
 });
 // Authenticate user's password
 UserSchema.methods.authenticate = function(passwordTry, callback){

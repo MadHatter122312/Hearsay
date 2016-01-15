@@ -4,6 +4,7 @@ var router = express.Router();
 var User = require('../models/user');
 
 // ~~~~~~~~~~GET ROUTE~~~~~~~~~~~~~ //
+// Index: All Users
 router.get('/',function(req, res){
   User.find({}, function(err, databaseUsers){
     res.json({users: databaseUsers});
@@ -11,6 +12,7 @@ router.get('/',function(req, res){
 });
 
 // ~~~~~~~~~~POST ROUTE~~~~~~~~~~~~~ //
+// Create
 router.post('/', function(req, res){ // POST /api/users
   var userData = req.body.user;
   var newUser = new User(userData);
@@ -21,6 +23,7 @@ router.post('/', function(req, res){ // POST /api/users
 });
 
 // ~~~~~~~~~~PATCH ROUTE~~~~~~~~~~~~~ //
+// Update
 router.patch('/', function(req, res){ // PATCH /api/users
   if(req.user){ // If a user has been found via token
     // req.user.update(req.body.user); // modify the user information
@@ -48,10 +51,10 @@ router.post('/authenticate', function(req, res){
   //   }
   // });
 
-  var usernameTry = req.body.username;
-  var passwordTry = req.body.password;
-  User.findOne({username: usernameTry}, function(err, databaseUser){
-    databaseUser.authenticate(passwordTry, function(err, isMatch){
+  var usernameAttempt = req.body.username;
+  var passwordAttempt = req.body.password;
+  User.findOne({username: usernameAttempt}, function(err, databaseUser){
+    databaseUser.authenticate(passwordAttempt, function(err, isMatch){
       if(isMatch)
         databaseUser.setToken(function(){
           res.json({description: 'password is correct', token: databaseUser.token});
