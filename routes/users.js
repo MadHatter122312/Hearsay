@@ -36,30 +36,30 @@ router.patch('/', function(req, res){ // PATCH /api/users
 router.post('/authenticate', function(req, res){
   console.log('Authenticate Tried');
 
-  User.findOne({username: req.body.username}, function(err, databaseUser){
-    if(databaseUser){
-      databaseUser.authenticate(req.body.password, function(err, isMatch){
-        if(isMatch){
-          databaseUser.setToken(err, function(){
-            res.json({description: 'success', token: databaseUser.token});
-          });
-        }
-      });
-    }
-  });
-
-  // var usernameTry = req.body.username;
-  // var passwordTry = req.body.password;
-  // User.findOne({username: usernameTry}, function(err, databaseUser){
-  //   databaseUser.authenticate(passwordTry, function(err, isMatch){
-  //     if(isMatch)
-  //       databaseUser.setToken(function(){
-  //         res.json({description: 'password is correct', token: databaseUser.token});
-  //       });
-  //     else
-  //       res.json({description: 'password is incorrect'});
-  //   });
+  // User.findOne({username: req.body.username}, function(err, databaseUser){
+  //   if(databaseUser){
+  //     databaseUser.authenticate(req.body.password, function(err, isMatch){
+  //       if(isMatch){
+  //         databaseUser.setToken(err, function(){
+  //           res.json({description: 'success', token: databaseUser.token});
+  //         });
+  //       }
+  //     });
+  //   }
   // });
+
+  var usernameTry = req.body.username;
+  var passwordTry = req.body.password;
+  User.findOne({username: usernameTry}, function(err, databaseUser){
+    databaseUser.authenticate(passwordTry, function(err, isMatch){
+      if(isMatch)
+        databaseUser.setToken(function(){
+          res.json({description: 'password is correct', token: databaseUser.token});
+        });
+      else
+        res.json({description: 'password is incorrect'});
+    });
+  });
 });
 
 // ~~~~~~~~~~EXPORTS~~~~~~~~~~~~~ //
