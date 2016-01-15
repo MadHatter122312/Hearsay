@@ -24,12 +24,14 @@ UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens
 });
 
 // Give token to user with crypto encryption
-UserSchema.methods.setToken = function(callback){
+UserSchema.methods.setToken = function(err, done){
   var scope = this;
   crypto.randomBytes(256, function(err, rawToken){
+    if(err) return done(err);
     scope.token = rawToken;
     scope.save(function(){
-      callback();
+      if(err) return done(err);
+      done();
     });
   });
 };
