@@ -28,6 +28,7 @@ app.use(function(req, res, next){
   next();
 });
 
+
 // ~~~~~~~~~~IMPORT ROUTER~~~~~~~~~~~~~ //
 var indexRouter = require('./routes/index');
 var hearsaysRouter = require('./routes/api/hearsays');

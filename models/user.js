@@ -24,7 +24,7 @@ UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens
 });
 
 // Give token to user with crypto encryption
-UserSchema.methods.setToken = function(err, callback){
+UserSchema.methods.setToken = function(callback){
   var scope = this;
   crypto.randomBytes(256, function(err, rawToken){
     scope.token = rawToken;
