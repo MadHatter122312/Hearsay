@@ -5,14 +5,14 @@ var crypto = require('crypto');
 
 // ~~~~~~~~~~SCHEMA~~~~~~~~~~~~~ //
 var UserSchema = mongoose.Schema({
-  firstName: {type:String},
-  lastName: {type:String},
-  birthday: {type:Date},
-  email: {type:String},
-  username: {type:String},
-  password: {type:String},
-  location: {type:String},
-  token: {type:String}
+  firstName: {type: String},
+  lastName: {type: String},
+  birthday: {type: Date},
+  email: {type: String},
+  username: {type: String},
+  password: {type: String},
+  location: {type: String},
+  token: {type: String}
 }, {timestamps:true});
 
 // ~~~~~~~~~~METHODS~~~~~~~~~~~~~ //
