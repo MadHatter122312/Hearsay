@@ -4,14 +4,14 @@ var mongoose = require('mongoose');
 // Setup schema for database
 
 // Comment Schema
-var commentSchema = mongoose.Schema({
-  content: {type:String},
+var CommentSchema = mongoose.Schema({
+  body: {type:String},
   username: {type:String}
 }, {timestamps:true});
 // Hearsay Schema
-var hearsaySchema = mongoose.Schema({
-  content: {type:String},
-  comment: [commentSchema],
+var HearsaySchema = mongoose.Schema({
+  body: {type:String},
+  comment: [CommentSchema],
   username: {type:String}
 }, {timestamps:true});
 

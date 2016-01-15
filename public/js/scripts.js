@@ -43,6 +43,7 @@ function logInUser(usernameAttempt, passwordAttempt, callback) {
 // create a from handler for user Login
 
 
+<<<<<<< HEAD
 // Get all Users
 function getAllUsers(callback){
   callback = callback || function(){};
@@ -84,3 +85,24 @@ function createHearsay(hearsayData, callback){
 
 
 //Don't forget to all all of those function after doc ready...
+=======
+// // Get all Users
+// function getAllUsers(callback){
+//   callback = callback || function(){};
+//   $.ajax({
+//     url: '/api/users',
+//     success: function(data){
+//       var users = data.users || [];
+//       callback(users);
+//     }
+//   })
+// }
+// // Render Users
+// function renderUsers(usersArray){
+//   var source = $('#users-template').html();
+//   var template = Handlebars.compile(source);
+//   var context = {users: usersArray};
+//   var usersElement = template(context);
+//   return usersElement;
+// }
+>>>>>>> 2bb57319fee3fff9361b288a2a76b3260b12e9dd
