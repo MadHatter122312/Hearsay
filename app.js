@@ -3,6 +3,7 @@ var express = require('express');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var loadUser = require('./middleware/loadUser');
 
 // Instance of Express
 var app = express();
@@ -19,6 +20,8 @@ mongoose.connect(mongoPath);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 app.use(morgan('dev'));
+app.use(loadUser);
+
 // Custom Middleware for Accessing APIs
 app.use(function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,13 +32,11 @@ app.use(function(req, res, next){
 var indexRouter = require('./routes/index');
 var hearsaysRouter = require('./routes/api/hearsays');
 var usersRouter = require('./routes/users');
-var loadUser = require('./middleware/loadUser');
 
 // ~~~~~~~~~~MAP ROUTER~~~~~~~~~~~~~ //
 app.use('/', indexRouter);
 app.use('/api/hearsays', hearsaysRouter);
 app.use('/api/users', usersRouter);
-app.use(loadUser);
 
 // ~~~~~~~~~~LISTENER~~~~~~~~~~~~~ //
 var port = 8080;
