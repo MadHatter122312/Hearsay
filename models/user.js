@@ -22,13 +22,7 @@ UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens
   }
   return next();
 });
-// Authenticate user's password
-UserSchema.methods.authenticate = function(passwordAttempt, callback){
-  bcrypt.compare(passwordAttempt, this.password, function(err, isMatch){
-    if(err) return callback(err);
-    callback(null, isMatch);
-  });
-};
+
 // Give token to user with crypto encryption
 UserSchema.methods.setToken = function(callback){
   var scope = this;
@@ -40,6 +34,13 @@ UserSchema.methods.setToken = function(callback){
   });
 };
 
+// Authenticate user's password
+UserSchema.methods.authenticate = function(passwordAttempt, callback){
+  bcrypt.compare(passwordAttempt, this.password, function(err, isMatch){
+    if(err) return callback(err);
+    callback(null, isMatch);
+  });
+};
 
 // ~~~~~~~~~~EXPORTS~~~~~~~~~~~~~ //
 module.exports = mongoose.model('User', UserSchema);
