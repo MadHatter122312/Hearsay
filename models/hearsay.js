@@ -5,12 +5,12 @@ var mongoose = require('mongoose');
 
 // Comment Schema
 var CommentSchema = mongoose.Schema({
-  content: {type:String},
+  body: {type:String},
   username: {type:String}
 }, {timestamps:true});
 // Hearsay Schema
 var HearsaySchema = mongoose.Schema({
-  content: {type:String},
+  body: {type:String},
   comment: [CommentSchema],
   username: {type:String}
 }, {timestamps:true});
