@@ -23,8 +23,8 @@ UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens
   return next();
 });
 // Authenticate user's password
-UserSchema.methods.authenticate = function(passwordTry, callback){
-  bcrypt.compare(passwordTry, this.password, function(err, isMatch){
+UserSchema.methods.authenticate = function(passwordAttempt, callback){
+  bcrypt.compare(passwordAttempt, this.password, function(err, isMatch){
     if(err) return callback(err);
     callback(null, isMatch);
   });
