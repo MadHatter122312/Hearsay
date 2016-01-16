@@ -5,3 +5,15 @@ Hey this is Igor
 
 
 testing
+
+<!-- 
+createUser
+setCreateUserFormHandler
+updateUser
+setUpdateUserFormHandler
+logInUser
+setLogInFormHandler
+getAllUsers
+renderUsers
+updateUsersAndView
+ -->
