@@ -17,8 +17,8 @@ router.post('/', function(req, res){ // POST /api/users
   var userData = req.body.user;  // Assign the user's data
   var newUser = new User(userData); // Make a new User using the user's data
   newUser.save(function(err, databaseUser){ // Save user to the database
-    res.json(databaseUser); // Send the new user as JSON
-    // res.redirect('/'); // Questionable because it's an API
+    // res.json(databaseUser); // Send the new user as JSON
+    res.redirect('/'); // Questionable because it's an API
   });
 });
 

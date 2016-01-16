@@ -9,7 +9,7 @@ var Hearsay = require('../../models/hearsay');
 router.get('/', function(req, res){
   Hearsay.find({}, function(err, dbHearsays){
     if(err){ };
-    res.json({ hearsays: dbHearsays});
+    res.json({hearsays: dbHearsays});
   });
 });
 
@@ -21,11 +21,22 @@ router.get('/:id', function(req, res, next){
   });
 });
 
+// GET COMMMENT
+router.get('/:id/comments', function(req, res, next){
+  Hearsay.findById( req.params.id, function(err, dbHearsay){
+    if(err) {};
+    res.json(dbHearsay);
+  });
+});
+
 // POST
 router.post('/', function(req, res, next){
   console.log('creating');
-  Hearsay.create(req.body.hearsay, function(err, hearsay){
-    res.json(hearsay);
+  var hearsayData = req.body.hearsay;
+  var hearsay = new Hearsay(hearsayData);
+  hearsay.username = req.user.username;
+  hearsay.save(function(err, databaseHearsay){
+    res.json({hearsay: databaseHearsay});
   });
 });
 
