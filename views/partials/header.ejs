@@ -1,0 +1,19 @@
+<div id="banner">
+  <h1 id="logo">Project Hearsay</h1>
+
+  <form id="search">
+    <input id='search-field' type="text" name="search" placeholder="&#xf002; search">
+  </form>
+
+  <form id="log-out">
+    <button type="submit" value="Log-Out">LogOut</button>
+  </form>
+</div>
+
+<script id="users-template" type="text/x-handlebars-template">
+  {{#each users}}
+    <div>
+      <h3> {{ username }}</h3>
+    </div>
+  {{/each}}
+</script>

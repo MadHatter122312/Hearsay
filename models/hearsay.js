@@ -5,14 +5,14 @@ var mongoose = require('mongoose');
 
 // Comment Schema
 var CommentSchema = mongoose.Schema({
-  body: {type:String},
-  username: {type:String}
+  body: {type: String},
+  username: {type: String}
 }, {timestamps:true});
 // Hearsay Schema
 var HearsaySchema = mongoose.Schema({
-  body: {type:String},
+  body: {type: String},
   comment: [CommentSchema],
-  username: {type:String}
+  username: {type: String}
 }, {timestamps:true});
 
 // Export module

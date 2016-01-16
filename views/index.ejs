@@ -5,7 +5,9 @@
 </head>
 <body>
 
-  <h1> Project Hearsay </h1>
+  <header>
+    <% include ./partials/header %>
+  </header>
 
     <section id="user-manager" class="content-block">
       <% include ./partials/users-manager %>
@@ -13,6 +15,15 @@
 
     <section id="users">
     </section>
+
+    <section id="hearsay-list">
+    </section>
+
+    <form class="content-block" id="new-hearsay">
+      <input type="text" name="username" placeholder="username">
+      <textarea name="body" rows="3" cols="30"></textarea>
+      <input type="submit" name="name" value="Tell Us">
+    </form>
 
 </body>
 </html>
