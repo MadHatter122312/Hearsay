@@ -1,3 +1,6 @@
+console.log('...loaded');
+
+// ~~~~~~~~~~~~~~~~~~~~ BEAHVIORS ~~~~~~~~~~~~~~~~~~~~ //
 // 1. getAllUsers
 // 2. getAllHearsays
 // 3. createUser
@@ -19,10 +22,7 @@
 // 19. setLogInFormHandler
 // 20. setLogOutHandler
 
-console.log('...loaded');
-
-// ~~~~~~~~~~~~~~~~~~~~ BEAHVIORS ~~~~~~~~~~~~~~~~~~~~ //
-
+// ~~~~~~~~~~~~~~~~~~~~ GET ALL ~~~~~~~~~~~~~~~~~~~~ //
 // Get all Users
 function getAllUsers(callback){
   callback = callback || function(){};
@@ -35,7 +35,7 @@ function getAllUsers(callback){
   })
 }
 
-// Get all hearsays
+// Get all Hearsays
 function getAllHearsays(callback){
   callback = callback || function(){};
   $.ajax({
@@ -47,7 +47,8 @@ function getAllHearsays(callback){
   });
 }
 
-// Send a request to create a user
+// ~~~~~~~~~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~~~~~~~~~ //
+// Send a request to create a User
 function createUser(userData, callback) {
   $.ajax({
     method: 'post',
@@ -59,7 +60,7 @@ function createUser(userData, callback) {
   });
 }
 
-// Send a request to create a hearsay
+// Send a request to create a Hearsay
 function createHearsay(hearsayData, callback){
   callback = callback || function(){}
   $.ajax({
@@ -73,7 +74,7 @@ function createHearsay(hearsayData, callback){
   });
 }
 
-// Send a request to create a comment
+// Send a request to create a Comment
 function createComment(hearsayID, commentBody, callback){
   callback = callback || function(){};
   $.ajax({
@@ -87,6 +88,7 @@ function createComment(hearsayID, commentBody, callback){
   });
 }
 
+// ~~~~~~~~~~~~~~~~~~~~ RENDER ~~~~~~~~~~~~~~~~~~~~ //
 // Render Users
 function renderUsers(usersArray){
   var source = $('#users-template').html();
@@ -96,7 +98,7 @@ function renderUsers(usersArray){
   return usersElement;
 }
 
-// Render hearsays
+// Render Hearsays
 function renderHearsay(hearsay){
   var $el = $('<div>').addClass('hearsay content-block');
   $el.append( $('<h2>').addClass('username').text(hearsay.username) ); //again, this will go away but is left in for testing purposes
@@ -104,11 +106,12 @@ function renderHearsay(hearsay){
 
   var $commentList = $('<section>').addClass('comment-list');
   for (var i = 0; i < hearsay.comment.length; i++) {
-    comment = hearsay.comments[i];
+    comment = hearsay.comment[i];
     $commentList.append( renderComment(comment) );
   }
 
   var $commentForm = renderCommentForm(hearsay);
+
   $commentList.append( $commentForm );
 
   $el.append( $commentList );
@@ -116,18 +119,20 @@ function renderHearsay(hearsay){
   return $el;
 }
 
-// Render hearsay list
+// Render Hearsay list
 function renderHearsayList(hearsays, $list){
   $list.empty();
   var hearsay;
-  for (var i = 0; i < hearsays.length; i++) {
+  for(var i = 0; i < hearsays.length; i++) {
     hearsay = hearsays[i];
     $hearsayView = renderHearsay(hearsay);
-    $list.append($hearsayView);
+    $list.prepend($hearsayView);  // Prepend to post newest post on top
+    // But if you comment on an older post, that post will move to the top
+    // We should figure out how to fix this so that the newest post will remain at top
   }
 }
 
-// Render the comment form
+// Render the Comment Form
 function renderCommentForm(hearsay){
   var $commentForm = $('<form>').addClass('comment-generator');
   $commentForm.append( $('<input type="hidden" name="hearsay-id">').val(hearsay._id) );
@@ -137,7 +142,7 @@ function renderCommentForm(hearsay){
   return $commentForm;
 }
 
-// Render comments
+// Render Comments
 function renderComment(comment){
   var $el = $('<div>').addClass('comment');
   $el.append( $('<h4>').addClass('username').text(comment.username) ); //this will go away eventually, but is left in right now for testing purposes
@@ -145,7 +150,8 @@ function renderComment(comment){
   return $el;
 }
 
-// Send request to update a user
+// ~~~~~~~~~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~~~~~~~ //
+// Send request to update a User
 function updateUser(userData, callback){
   $.ajax({
     method: 'patch',
@@ -175,11 +181,13 @@ function updateUsersAndView(){
 // Update Hearsays and the view section for users
 function updateHearsaysAndViews(){
   getAllHearsays(function(hearsays){
+    console.log(hearsays);
     var $list = $('#hearsay-list');
     renderHearsayList(hearsays, $list);
   });
 }
 
+// ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
 // Acquire input values from the form to update the user's password
 function setUpdateUserFormHandler(){
   $('form#update-password').on('submit', function(e){
@@ -232,11 +240,13 @@ function setHearsayFormHandler(){
   $('form#hearsay-generator').on('submit', function(e){
     e.preventDefault();
     var formUsername = $(this).find('input[name="username"]').val(); //to be taken out later, testing purposes etc..
-    var formBody = $(this).find('textarea[name="body"]').val();
+    var $formElement = $(this).find('textarea[name="body"]');
+    var formBody = $formElement.val();
     var hearsayData = {body:formBody};
     createHearsay(hearsayData, function(hearsay){
       updateHearsaysAndViews();
     });
+    $formElement.val('');
   });
 }
 
@@ -244,6 +254,7 @@ function setHearsayFormHandler(){
 function setCommentFormHandler(){
   $('body').on('submit', 'form.comment-generator', function(e){
     e.preventDefault();
+
     var hearsayID = $(this).find('input[name="hearsay-id"]').val();
     var formUsername = $(this).find('input[name="username"]').val(); //again to be taken out later, testing etc...
     var formBody = $(this).find('input[name="body"]').val();
@@ -255,6 +266,7 @@ function setCommentFormHandler(){
   });
 }
 
+// ~~~~~~~~~~~~~~~~~~~~ LOGIN / LOGOUT ~~~~~~~~~~~~~~~~~~~~ //
 // Send a request to LogIn
 function logInUser(usernameAttempt, passwordAttempt, callback) {
   $.ajax({
@@ -309,33 +321,38 @@ function setLogOutHandler(){
 
 
 $(function(){
-  // if($.cookie('token')){
-  //   $('#user-manager').show();
-  //   $('#hearsay-generator').show();
-  //   // $('#users-template').show();
+
+  if($.cookie('token')){
+    $('#hearsay-generator').show();
+    $('#users-template').show();
+    $('form#log-in').hide();
+    $('#user-manager').hide();
     setHearsayFormHandler();
     setCommentFormHandler();
     setLogOutHandler();
     updateHearsaysAndViews();
-  // } else {
+  } else {
     $('.update-password').hide();
     $('form#log-in').show();
     $('button#log-out').hide();
     $('#hearsay-generator').hide();
-    // $('#users-template').hide();
+    $('#users-template').hide();
+    $('form#log-out').hide();
     setLogInFormHandler();
-  // }
+  }
 
   $('input#search-field').on('keyup', function(){
     var searchText = $(this).val();
-    $.ajax({
-    url: '/api/hearsays?search=' + searchText,
-    success: function(data){
-      var hearsays = data.hearsays;
-      var $list = $('#hearsay-list');
-      renderHearsayList(hearsays, $list);
+      $.ajax({
+      url: '/api/hearsays?search=' + searchText,
+      success: function(data){
+        console.log(data);
+        var hearsays = data.hearsays;
+        var $list = $('#hearsay-list');
+        renderHearsayList(hearsays, $list);
       }
     });
   });
+
 
 });
