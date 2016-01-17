@@ -1,3 +1,44 @@
 * {
   text-align: center;
+  margin: 0 auto;
+}
+
+form input{
+  font-family: FontAwesome;
+}
+
+.form-group{
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.hearsay{
+  max-width: 40%;
+  border: 1px solid lightgrey;
+  margin-bottom: 1em;
+  padding: .6em;
+  text-align: center;
+  border-radius: 5px;
+  /*margin: 0 auto;*/
+}
+
+.hearsay .username{
+  text-align: left;
+}
+
+.hearsay .body{
+  text-align: left;
+}
+
+.hearsay .comment-username{
+  text-align: right;
+}
+
+.hearsay .comment-body{
+  text-align: right;
+}
+
+#comment-submit{
+  margin-left: .2em;
 }

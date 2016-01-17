@@ -134,18 +134,20 @@ function renderHearsayList(hearsays, $list){
 
 // Render the Comment Form
 function renderCommentForm(hearsay){
-  var $commentForm = $('<form>').addClass('comment-generator');
-  $commentForm.append( $('<input type="hidden" name="hearsay-id">').val(hearsay._id) );
+  var $commentForm = $('<form>').addClass('form-inline').attr('id', 'comment-generator');
+  var $commentDiv = $('<div>').addClass('form-group');
+  $commentForm.append( $commentDiv );
+  $commentDiv.append( $('<input type="hidden" name="hearsay-id">').val(hearsay._id) );
   // $commentForm.append( $('<input type="text" name="username">') );
-  $commentForm.append( $('<input type="text" name="body" placeholder="comment">') );
-  $commentForm.append( $('<input type="submit">') );
+  $commentDiv.append( $('<input class="form-control" type="text" name="body" placeholder="comment">') );
+  $commentDiv.append( $('<input class="btn btn-default" type="submit" id="comment-submit">') );
   return $commentForm;
 }
 
 // Render Comments
 function renderComment(comment){
   var $el = $('<div>').addClass('comment');
-  $el.append( $('<h4>').addClass('username').text(comment.username) ); //this will go away eventually, but is left in right now for testing purposes
+  $el.append( $('<h4>').addClass('comment-username').text(comment.username) ); //this will go away eventually, but is left in right now for testing purposes
   $el.append( $('<p>').addClass('comment-body').text(comment.body) );
   return $el;
 }
@@ -252,7 +254,7 @@ function setHearsayFormHandler(){
 
 // Acquire input data from the comment form and create a comment using the acquired data
 function setCommentFormHandler(){
-  $('body').on('submit', 'form.comment-generator', function(e){
+  $('body').on('submit', 'form#comment-generator', function(e){
     e.preventDefault();
 
     var hearsayID = $(this).find('input[name="hearsay-id"]').val();
@@ -302,6 +304,7 @@ function setLogInFormHandler(){
       $('#hearsay-generator').show();
       console.log('Token:', $.cookie('token') );
       updateHearsaysAndViews();
+      location.reload();
     });
   });
 }
@@ -325,6 +328,7 @@ $(function(){
   if($.cookie('token')){
     $('#hearsay-generator').show();
     $('#users-template').show();
+    $('form#log-out').show();
     $('form#log-in').hide();
     $('#user-manager').hide();
     setHearsayFormHandler();

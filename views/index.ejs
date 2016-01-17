@@ -13,11 +13,17 @@
       <% include ./partials/users-manager %>
     </section>
 
-    <form class="content-block" id="hearsay-generator">
-      <h4 class="create-hearsay"> Post a hearsay </h4>
-      <textarea name="body" rows="3" cols="30" placeholder="Type in your hearsay here"></textarea>
-      <input type="submit" name="name" value="Post Hearsay">
-    </form>
+    <div class="container">
+      <form class="content-block" id="hearsay-generator">
+        <h4 class="create-hearsay"> Post a hearsay </h4>
+        <div class="form-group">
+          <textarea class="form-control" name="body" rows="3" cols="30" placeholder="Type in your hearsay here"></textarea>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-default" type="submit" name="name" value="Post Hearsay">
+        </div>
+      </form>
+    </div>
 
     <section id="users">
     </section>
