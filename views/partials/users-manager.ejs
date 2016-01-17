@@ -4,6 +4,22 @@
   <form id="sign-up" action="/api/users" method='post'>
     <input type='text' name='user[username]' placeholder='username'>
     <input type='password' name='user[password]' placeholder='password'>
+    <form id="dropdowns" action="index.html">
+      <label>State:</label>
+        <select id="state" name="network">
+          <option value="000">-Select State-</option>
+        </select>
+
+      <br />
+
+      <label>City:</label>
+        <select id="model" name="model">
+          <option value="000">-Select City-</option>
+        </select>
+
+      <br />
+
+    </form>
     <input type='submit' style='visibility: hidden;'>
   </form>
 </div>

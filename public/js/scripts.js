@@ -302,6 +302,7 @@ function setLogInFormHandler(){
       $('#hearsay-generator').show();
       console.log('Token:', $.cookie('token') );
       updateHearsaysAndViews();
+      location.reload();
     });
   });
 }
