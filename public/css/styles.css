@@ -42,3 +42,7 @@ form input{
 #comment-submit{
   margin-left: .2em;
 }
+
+#delete-hearsay{
+  float: left;
+}

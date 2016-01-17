@@ -103,6 +103,7 @@ function renderHearsay(hearsay){
   var $el = $('<div>').addClass('hearsay content-block');
   $el.append( $('<h2>').addClass('username').text(hearsay.username) ); //again, this will go away but is left in for testing purposes
   $el.append( $('<p>').addClass('body').text(hearsay.body) );
+  $el.append( $('<button>').addClass('btn btn-default').attr('id', 'delete-hearsay').data('id', hearsay._id).text('Delete') );
 
   var $commentList = $('<section>').addClass('comment-list');
   for (var i = 0; i < hearsay.comment.length; i++) {
@@ -135,7 +136,7 @@ function renderHearsayList(hearsays, $list){
 // Render the Comment Form
 function renderCommentForm(hearsay){
   var $commentForm = $('<form>').addClass('form-inline').attr('id', 'comment-generator');
-  var $commentDiv = $('<div>').addClass('form-group');
+  var $commentDiv = $('<div>').addClass('form-inline');
   $commentForm.append( $commentDiv );
   $commentDiv.append( $('<input type="hidden" name="hearsay-id">').val(hearsay._id) );
   // $commentForm.append( $('<input type="text" name="username">') );
@@ -186,6 +187,22 @@ function updateHearsaysAndViews(){
     console.log(hearsays);
     var $list = $('#hearsay-list');
     renderHearsayList(hearsays, $list);
+  });
+}
+
+// ~~~~~~~~~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~~~~~~~ //
+function removeHearsay(payload){
+  $('body').on('click', '#delete-hearsay', function(e){
+    e.preventDefault();
+    var hearsay = $(this);
+    $.ajax({
+      method: 'delete',
+      url: '/api/hearsays/' + hearsay.data('id'),
+      success: function(){
+        $(this).remove();
+        updateHearsaysAndViews();
+      }
+    });
   });
 }
 
@@ -329,12 +346,14 @@ $(function(){
     $('#hearsay-generator').show();
     $('#users-template').show();
     $('form#log-out').show();
+    $('input#search-field').show();
     $('form#log-in').hide();
     $('#user-manager').hide();
     setHearsayFormHandler();
     setCommentFormHandler();
     setLogOutHandler();
     updateHearsaysAndViews();
+    removeHearsay();
   } else {
     $('.update-password').hide();
     $('form#log-in').show();
@@ -342,6 +361,7 @@ $(function(){
     $('#hearsay-generator').hide();
     $('#users-template').hide();
     $('form#log-out').hide();
+    $('input#search-field').hide();
     setLogInFormHandler();
   }
 
