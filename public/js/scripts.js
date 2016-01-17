@@ -365,6 +365,12 @@ $(function(){
     setLogInFormHandler();
   }
 
+  $('#delete-hearsay').click(function(){
+    if (!confirm("Are you sure?")){
+      return false;
+    }
+  });
+
   $('input#search-field').on('keyup', function(){
     var searchText = $(this).val();
       $.ajax({
