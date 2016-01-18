@@ -272,9 +272,7 @@ function setCreateUserFormHandler(){
 
     // Create a new user
     createUser(userData, function(user){
-      updateHearsaysAndViews(); // Update the entire view
     });
-
   });
 }
 
