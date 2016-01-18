@@ -237,7 +237,7 @@ var myJson = {
             ]
         },
         {
-            "name": "Gerogia",
+            "name": "Georgia",
             "id": "10",
             "cities": [
                 {
@@ -1305,20 +1305,19 @@ var myJson = {
      ]
 }
 
-    $.each(myJson.state, function (index, value) {
-        $("#state").append('<option value="'+value.id+'">'+value.name+'</option>');
-        $("#state").change(function () {
-            $("#city").find("option:gt(0)").remove();
-            $("#city").find("option:first").text("Loading...");
-            $.getJSON("/get/cities", {
-                state_id: $(this).val()
-            }, function (json) {
-                $("#city").find("option:first").text("");
-                for (var i = 0; i < json.length; i++) {
-                    $("<option/>").attr("value", json[i].id).text(json[i].name).appendTo($("#city"));
-                }
-            });
-        });
+    $.each(myJson.state, function(index, value) {
+        $("#state").append('<option value="'+value.name+'">'+value.name+'</option>');
+    });
+
+    $('#state').on('change', function(){
+        for(var i = 0; i < myJson.state.length; i++) {
+            if(myJson.state[i].name == $(this).val()){
+                $('#city').html('<option value="000"> - Select City </option>');
+                $.each(myJson.state[i].cities, function(index, value) {
+                    $('#city').append('<option value="'+value.name+'">'+value.name+'</option>');
+                });
+            }
+        }
     });
 
 });

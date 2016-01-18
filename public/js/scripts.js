@@ -231,23 +231,47 @@ function setCreateUserFormHandler(){
   $('form#sign-up').on('submit', function(e){
     e.preventDefault();
 
+    // Obtain the first name from form
+    var firstNameField = $(this).find('input[name="user[firstName]"]');
+    var firstNameText = firstNameField.val();
+    firstNameField.val('');
+
+    // Obtain the last name from form
+    var lastNameField = $(this).find('input[name="user[lastName]"]');
+    var lastNameText = lastNameField.val();
+    lastNameField.val('');
+
     // Obtain the username from form
-    var usernameField = $(this).find('input[name="username"]');
+    var usernameField = $(this).find('input[name="user[username]"]');
     var usernameText = usernameField.val();
     usernameField.val('');
 
     // Obtain the password from form
-    var passwordField = $(this).find('input[name="password"]');
+    var passwordField = $(this).find('input[name="user[password]"]');
     var passwordText = passwordField.val();
     passwordField.val('');
 
+    // Obtain state and state from form
+    var stateField = $(this).find('select[name="user[state]"]');
+    var stateText = stateField.val();
+    stateField.val('');
+
+    // Obtain city and state from form
+    var cityField = $(this).find('select[name="user[city]"]');
+    var cityText = cityField.val();
+    cityField.val('');
+
+    // Obtain email from form
+    var emailField = $(this).find('input[name="user[email]"]');
+    var emailText = emailField.val();
+    emailField.val('');
+
     // Organize the data to be sent
-    var userData = {username: usernameText, password: passwordText};
+    var userData = {firstName: firstNameText, lastName: lastNameText, email: emailText, username: usernameText, password: passwordText, location: cityText + ", " + stateText};
     console.log('userdata', userData);
 
     // Create a new user
     createUser(userData, function(user){
-      console.log(user);
       updateHearsaysAndViews(); // Update the entire view
     });
 
@@ -362,6 +386,7 @@ $(function(){
     $('#users-template').hide();
     $('form#log-out').hide();
     $('input#search-field').hide();
+    setCreateUserFormHandler();
     setLogInFormHandler();
   }
 

@@ -3,25 +3,32 @@
   <h4>Sign-Up</h4>
   <div class="container">
     <form id="sign-up" action="/api/users" method='post'>
-      <div class="form-group">
-        <input class="form-control" type='text' name='user[username]' placeholder='username'>
+      <div class="form-group" id="first-name">
+        <input class="form-control" type='firstname' name='user[firstName]' placeholder='First Name'>
       </div>
-      <div class="form-group">
-        <input class="form-control" type='password' name='user[password]' placeholder='password'>
+      <div class="form-group" id="last-name">
+        <input class="form-control" type='lastname' name='user[lastName]' placeholder='Last Name'>
       </div>
-      <form id="dropdowns" action="index.html">
-        <label>State:</label>
-          <select id="state" name="network">
-            <option value="000">-Select State-</option>
-          </select>
-        <br />
-        <label>City:</label>
-          <select id="model" name="model">
-            <option value="000">-Select City-</option>
-          </select>
-        <br />
-      </form>
-      <input type='submit' style='visibility: hidden;'>
+      <div class="form-group" id="username">
+        <input class="form-control" type='text' name='user[username]' placeholder='Username'>
+      </div>
+      <div class="form-group" id="password">
+        <input class="form-control" type='password' name='user[password]' placeholder='Password'>
+      </div>
+      <label>State:</label>
+        <select id="state" name="user[state]">
+          <option value="000">-Select State-</option>
+        </select>
+      <br />
+      <label>City:</label>
+        <select id="city" name="user[city]">
+          <option value="000">-Select City-</option>
+        </select>
+      <br />
+      <div class="form-group" id="email">
+        <input class="form-control" type='email' name='user[email]' placeholder='email'>
+      </div>
+      <input type='submit'>
     </form>
   </div>
 </div>
