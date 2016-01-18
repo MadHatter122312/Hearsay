@@ -241,6 +241,11 @@ function setCreateUserFormHandler(){
     var lastNameText = lastNameField.val();
     lastNameField.val('');
 
+    // Obtain email from form
+    var emailField = $(this).find('input[name="user[email]"]');
+    var emailText = emailField.val();
+    emailField.val('');
+
     // Obtain the username from form
     var usernameField = $(this).find('input[name="user[username]"]');
     var usernameText = usernameField.val();
@@ -260,11 +265,6 @@ function setCreateUserFormHandler(){
     var cityField = $(this).find('select[name="user[city]"]');
     var cityText = cityField.val();
     cityField.val('');
-
-    // Obtain email from form
-    var emailField = $(this).find('input[name="user[email]"]');
-    var emailText = emailField.val();
-    emailField.val('');
 
     // Organize the data to be sent
     var userData = {firstName: firstNameText, lastName: lastNameText, email: emailText, username: usernameText, password: passwordText, location: cityText + ", " + stateText};
