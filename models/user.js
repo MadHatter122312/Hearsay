@@ -8,11 +8,13 @@ var UserSchema = mongoose.Schema({
   firstName: {type: String},
   lastName: {type: String},
   email: {type: String},
-  username: {type: String},
+  username: {type: String, index: { unique: true } },
   password: {type: String},
   location: {type: String},
   token: {type: String}
 }, {timestamps:true});
+
+UserSchema.path('username').index({ unique: true });
 
 // ~~~~~~~~~~METHODS~~~~~~~~~~~~~ //
 UserSchema.pre('save', function(next){ //pre-save hook: BEFORE save happens

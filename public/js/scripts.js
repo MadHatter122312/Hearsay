@@ -107,7 +107,18 @@ function renderUsers(usersArray){
   return usersElement;
 }
 
-function humanTime(date){
+// function humanTime(date){
+//   date = date.split('');
+//   var day = date.slice(8, 10).join('');
+//   var month = date.slice(5, 7).join('');
+//   var year = date.slice(0, 4).join('');
+//   var hour = date.slice(11, 13).join('');
+//   var minute = date.slice(14, 16).join('');
+
+//   return month + '/' + day + '/' + year + ' ' + '|' + ' ' + (hour - 5) + ':' + minute;
+// }
+
+Handlebars.registerHelper('toHuman', function(date){
   date = date.split('');
   var day = date.slice(8, 10).join('');
   var month = date.slice(5, 7).join('');
@@ -115,9 +126,11 @@ function humanTime(date){
   var hour = date.slice(11, 13).join('');
   var minute = date.slice(14, 16).join('');
 
-  return month + '/' + day + '/' + year + ' ' + '|' + ' ' + (hour - 5) + ':' + minute;
-}
+  return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
+});
 
+
+<<<<<<< HEAD
 // // Render Hearsays
 // function renderHearsay(hearsay){
 // }
@@ -134,6 +147,61 @@ function humanTime(date){
 // // Render Comments
 // function renderComment(comment){
 // }
+=======
+// Render Hearsays
+function renderHearsay(hearsay){
+var source = $('#hearsays-template').html();
+var template = Handlebars.compile(source);
+$.getJSON('/api/hearsays', function( data ){
+  var hearsayResult = data;
+  var compiledHtml = template(hearsayResult);
+  $('#hearsay-list').empty();
+  $('#hearsay-list').prepend(compiledHtml);
+  });
+}
+
+// Render Hearsay list
+function renderHearsayList(hearsays, $list){
+  $list.empty();
+  var hearsay;
+  for(var i = 0; i < hearsays.length; i++) {
+    hearsay = hearsays[i];
+    $hearsayView = renderHearsay(hearsay);
+    $list.prepend($hearsayView);  // Prepend to post newest post on top
+    // But if you comment on an older post, that post will move to the top
+    // We should figure out how to fix this so that the newest post will remain at top
+  }
+}
+
+function localizedHearsays(){
+  $('body').on('click', '#localize', function(e){
+    e.preventDefault();
+    var hearsayLocation = $('.hearsay').find('.location').html();
+    console.log(hearsayLocation);
+  });
+}
+
+
+// Render the Comment Form
+function renderCommentForm(hearsay){
+  var $commentForm = $('<form>').addClass('form-inline').attr('id', 'comment-generator');
+  var $commentDiv = $('<div>').addClass('form-inline');
+  $commentForm.append( $commentDiv );
+  $commentDiv.append( $('<input type="hidden" name="hearsay-id">').val(hearsay._id) );
+  // $commentForm.append( $('<input type="text" name="username">') );
+  $commentDiv.append( $('<input class="form-control" type="text" name="body" placeholder="comment">') );
+  $commentDiv.append( $('<input class="btn btn-default" type="submit" id="comment-submit">') );
+  return $commentForm;
+}
+
+// Render Comments
+function renderComment(comment){
+  var $el = $('<div>').addClass('comment');
+  $el.append( $('<h4>').addClass('comment-username').text(comment.username) ); //this will go away eventually, but is left in right now for testing purposes
+  $el.append( $('<p>').addClass('comment-body').text(comment.body) );
+  return $el;
+}
+>>>>>>> 844baffa2408883e5ab81e5c2b012621f95de3ed
 
 // ~~~~~~~~~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~~~~~~~ //
 // Send request to update a User
@@ -382,6 +450,7 @@ $(function(){
     setLogOutHandler();
     updateHearsaysAndViews();
     removeHearsay();
+    localizedHearsays();
   } else {
     $('.update-password').hide();
     $('form#log-in').show();
