@@ -7,20 +7,21 @@ console.log('...loaded');
 // 4. createHearsay
 // 5. createComment
 // 6. renderUsers
-// 7. renderHearsay
-// 8. renderHearsayList
-// 9. renderCommentForm
-// 10. renderComment
-// 11. updateUser
-// 12. updateUsersAndView
-// 13. updateHearsaysAndViews
-// 14. setUpdateUserFormHandler
-// 15. setCreateUserFormHandler
-// 16. setHearsayFormHandler
-// 17. setCommentFormHandler
-// 18. logInUser
-// 19. setLogInFormHandler
-// 20. setLogOutHandler
+// 7. humanTime
+// 8. renderHearsay
+// 9. renderHearsayList
+// 10. renderCommentForm
+// 11. renderComment
+// 12. updateUser
+// 13. updateUsersAndView
+// 14. updateHearsaysAndViews
+// 15. setUpdateUserFormHandler
+// 16. setCreateUserFormHandler
+// 17. setHearsayFormHandler
+// 18. setCommentFormHandler
+// 19. logInUser
+// 20. setLogInFormHandler
+// 21. setLogOutHandler
 
 // ~~~~~~~~~~~~~~~~~~~~ GET ALL ~~~~~~~~~~~~~~~~~~~~ //
 // Get all Users
