@@ -12,7 +12,8 @@ var CommentSchema = mongoose.Schema({
 var HearsaySchema = mongoose.Schema({
   body: {type: String},
   comment: [CommentSchema],
-  username: {type: String}
+  username: {type: String},
+  location: {type: String}
 }, {timestamps:true});
 
 // Export module

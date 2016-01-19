@@ -13,8 +13,8 @@
 <!--  Templates -->
 <script id="users-template" type="text/x-handlebars-template">
   {{#each users}}
-    <div>
-      <h3> {{ username }} </h3>
+    <div class="hearsay content-block">
+      <h3> {{ this.username }} </h3>
       <p>
         {{ firstName }} {{ lastName }}
       </p>
@@ -27,6 +27,33 @@
       <p>
         {{ location }}
       </p>
+    </div>
+  {{/each}}
+</script>
+
+<script id="hearsays-template" type="text/x-handlebars-template">
+  {{#each hearsays}}
+    <div class="hearsay content-block">
+      <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
+      <h2 class="username"> {{ this.username }} </h2>
+      <p class="body">
+        {{ this.body }}
+      </p>
+      <button class="btn btn-default" id="delete-hearsay" value="">Delete</button>
+      <form class="form-inline" id="comment-generator">
+        <div class="form-inline">
+          <input type="hidden" name="hearsay-id" value={{this._id}}>
+          <input class="form-control" type="text" name="body" placeholder="comment">
+          <input class="btn btn-default" type="submit" id="comment-submit">
+        </div>
+      </form>
+      {{#each this.comment}}
+      <div id="comment-list">
+        <h4 class="comment-username"> {{ this.username }} </h4>
+        <p class="comment-body"> {{ this.body }} </p>
+
+      </div>
+      {{/each}}
     </div>
   {{/each}}
 </script>
