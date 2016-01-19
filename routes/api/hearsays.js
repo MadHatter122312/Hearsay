@@ -7,10 +7,17 @@ var Hearsay = require('../../models/hearsay');
 
 // GET
 router.get('/', function(req, res){
-  Hearsay.find({}, function(err, dbHearsays){
-    if(err){ };
-    res.json({hearsays: dbHearsays});
-  });
+  if(req.query.search){
+    var searchTerm = req.query.search;
+    Hearsay.find({body: new RegExp(searchTerm, 'i') }, function(err, databaseHearsays){
+      res.json( {hearsays: databaseHearsays})
+    });
+  } else {
+    Hearsay.find({}, function(err, dbHearsays){
+      if(err){ };
+      res.json({hearsays: dbHearsays});
+    });
+  }
 });
 
 // GET ONLY ONE
