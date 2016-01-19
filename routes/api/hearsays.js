@@ -13,26 +13,26 @@ router.get('/', function(req, res){
       res.json( {hearsays: databaseHearsays})
     });
   } else {
-    Hearsay.find({}, function(err, dbHearsays){
+    Hearsay.find({}, function(err, databaseHearsays){
       if(err){ };
-      res.json({hearsays: dbHearsays});
+      res.json({hearsays: databaseHearsays});
     });
   }
 });
 
 // GET ONLY ONE
 router.get('/:id', function(req, res, next){
-  Hearsay.findById( req.params.id, function(err, dbHearsay){
+  Hearsay.findById( req.params.id, function(err, databaseHearsay){
     if(err) {};
-    res.json(dbHearsay);
+    res.json(databaseHearsay);
   });
 });
 
 // GET COMMMENT
 router.get('/:id/comments', function(req, res, next){
-  Hearsay.findById( req.params.id, function(err, dbHearsay){
+  Hearsay.findById( req.params.id, function(err, databaseHearsay){
     if(err) {};
-    res.json(dbHearsay);
+    res.json(databaseHearsay);
   });
 });
 
