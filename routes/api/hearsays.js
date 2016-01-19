@@ -9,8 +9,8 @@ var Hearsay = require('../../models/hearsay');
 router.get('/', function(req, res){
   if(req.query.search){
     var searchTerm = req.query.search;
-    Hearsay.find({body: new RegExp(searchTerm, 'i') }, function(err, dbHearsays){
-      res.json( {hearsays: dbHearsays})
+    Hearsay.find({body: new RegExp(searchTerm, 'i') }, function(err, databaseHearsays){
+      res.json( {hearsays: databaseHearsays})
     });
   } else {
     Hearsay.find({}, function(err, databaseHearsays){

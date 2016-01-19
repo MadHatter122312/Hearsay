@@ -100,13 +100,19 @@ function renderUsers(usersArray){
 
 function humanTime(date){
   date = date.split('');
-  var hour = date.splice()
+  var day = date.slice(8, 10).join('');
+  var month = date.slice(5, 7).join('');
+  var year = date.slice(0, 4).join('');
+  var hour = date.slice(11, 13).join('');
+  var minute = date.slice(14, 16).join('');
+
+  return month + '/' + day + '/' + year + ' ' + '|' + ' ' + (hour - 5) + ':' + minute;
 }
 
 // Render Hearsays
 function renderHearsay(hearsay){
   var $el = $('<div>').addClass('hearsay content-block');
-  $el.append( $('<h5>').addClass('createdAt').text(hearsay.createdAt) );
+  $el.append( $('<h5>').addClass('createdAt').text(humanTime(hearsay.createdAt)) );
   $el.append( $('<h2>').addClass('username').text(hearsay.username) ); //again, this will go away but is left in for testing purposes
   $el.append( $('<p>').addClass('body').text(hearsay.body) );
   $el.append( $('<button>').addClass('btn btn-default').attr('id', 'delete-hearsay').attr('data-toggle', 'modal').attr('data-target', '#dialog').data('id', hearsay._id).text('Delete') );
