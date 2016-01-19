@@ -136,7 +136,6 @@ function renderHearsay(hearsay){
 
 // Render Hearsay list
 function renderHearsayList(hearsays, $list){
-
 }
 
 // Render the Comment Form
