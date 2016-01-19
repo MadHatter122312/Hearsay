@@ -130,6 +130,23 @@ Handlebars.registerHelper('toHuman', function(date){
 });
 
 
+// Render Hearsays
+function renderHearsay(hearsay){
+}
+
+// Render Hearsay list
+function renderHearsayList(hearsays, $list){
+
+}
+
+// Render the Comment Form
+function renderCommentForm(hearsay){
+}
+
+// Render Comments
+function renderComment(comment){
+}
+
 // ~~~~~~~~~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~~~~~~~ //
 // Send request to update a User
 function updateUser(userData, callback){
