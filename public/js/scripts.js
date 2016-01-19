@@ -98,12 +98,18 @@ function renderUsers(usersArray){
   return usersElement;
 }
 
+function humanTime(date){
+  date = date.split('');
+  var hour = date.splice()
+}
+
 // Render Hearsays
 function renderHearsay(hearsay){
   var $el = $('<div>').addClass('hearsay content-block');
+  $el.append( $('<h5>').addClass('createdAt').text(hearsay.createdAt) );
   $el.append( $('<h2>').addClass('username').text(hearsay.username) ); //again, this will go away but is left in for testing purposes
   $el.append( $('<p>').addClass('body').text(hearsay.body) );
-  $el.append( $('<button>').addClass('btn btn-default').attr('id', 'delete-hearsay').attr('data-toggle', 'modal').data('id', hearsay._id).text('Delete') );
+  $el.append( $('<button>').addClass('btn btn-default').attr('id', 'delete-hearsay').attr('data-toggle', 'modal').attr('data-target', '#dialog').data('id', hearsay._id).text('Delete') );
 
   var $commentList = $('<section>').addClass('comment-list');
   for (var i = 0; i < hearsay.comment.length; i++) {
@@ -192,21 +198,24 @@ function updateHearsaysAndViews(){
 
 // ~~~~~~~~~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~~~~~~~ //
 function removeHearsay(payload){
- $('body').on('click', '#delete-hearsay', function(e){
-   e.preventDefault();
-   var hearsay = $(this);
-   var hearsayUserName = $(this).username
-   console.log(hearsayUserName);
-   $.ajax({
-     method: 'delete',
-     url: '/api/hearsays/' + hearsay.data('id'),
-     success: function(){
-       $(this).remove();
-       updateHearsaysAndViews();
-     }
-   });
- });
-}
+  $('body').on('click', '#delete-hearsay', function(e){
+    var $form = $(this).closest('form');
+    e.preventDefault();
+    $('#dialog').modal({ backdrop: 'static', keyboard: false })
+      .one('click', '#confirm-delete', function(e){
+        var hearsay = $(this);
+        $.ajax({
+          method: 'delete',
+          url: '/api/hearsays/' + hearsay.data('id'),
+          success: function(){
+            $(this).remove();
+            $form.trigger('submit');
+            updateHearsaysAndViews();
+          }
+        });
+      });
+    });
+  };
 
 // ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
 // Acquire input values from the form to update the user's password
