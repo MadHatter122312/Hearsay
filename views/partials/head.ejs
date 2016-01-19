@@ -31,20 +31,8 @@
   {{/each}}
 </script>
 
-<<<<<<< HEAD
+
 <!--  Templates -->
-<script id="hearsays-template" type="text/x-handlebars-template">
-  {{#each hearsays}}
-  <div class="hearsay content-block">
-      <h5 class="createdAt"> {{this.createdAt}} </h3>
-      <h2 class="username">
-        {{this.username}}
-      </h2>
-      <p class="body">
-        {{this.body}}
-      </p>
-      <button class="btn btn-default" id="delete-hearsay" data-toggle="modal" data-target="#dialog" style="visibility: visible;"> Delete </button>
-=======
 <script id="hearsays-template" type="text/x-handlebars-template">
   {{#each hearsays}}
     <div class="hearsay content-block">
@@ -53,8 +41,7 @@
       <p class="body">
         {{ this.body }}
       </p>
-      <button class="btn btn-default" id="delete-hearsay" value="">Delete</button>
->>>>>>> 844baffa2408883e5ab81e5c2b012621f95de3ed
+      <button class="btn btn-default" id="delete-hearsay" data-toggle="modal" data-target="#dialog" style="visibility: visible;"> Delete </button>
       <form class="form-inline" id="comment-generator">
         <div class="form-inline">
           <input type="hidden" name="hearsay-id" value={{this._id}}>
@@ -63,7 +50,6 @@
         </div>
       </form>
       {{#each this.comment}}
-<<<<<<< HEAD
       <section class="comment-list">
           <div class="comment">
             <h4 class="comment-username"> {{this.username}} </h4>
@@ -74,17 +60,3 @@
     </div>
   {{/each}}
 </script>
-
-
-
-=======
-      <div id="comment-list">
-        <h4 class="comment-username"> {{ this.username }} </h4>
-        <p class="comment-body"> {{ this.body }} </p>
-
-      </div>
-      {{/each}}
-    </div>
-  {{/each}}
-</script>
->>>>>>> 844baffa2408883e5ab81e5c2b012621f95de3ed
