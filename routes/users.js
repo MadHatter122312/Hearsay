@@ -11,6 +11,13 @@ router.get('/',function(req, res){  // GET /api/users
   });
 });
 
+// GET USER AUTHENTICATE
+router.get('/authenticate', function(req, res){
+  User.find({}, function(err, databaseUsers){
+    res.json({users: databaseUsers});
+  });
+});
+
 // ~~~~~~~~~~POST ROUTE~~~~~~~~~~~~~ //
 // Create a new user
 router.post('/', function(req, res){ // POST /api/users
