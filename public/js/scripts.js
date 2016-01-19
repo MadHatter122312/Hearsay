@@ -198,24 +198,19 @@ function updateHearsaysAndViews(){
 
 // ~~~~~~~~~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~~~~~~~ //
 function removeHearsay(payload){
-  $('body').on('click', '#delete-hearsay', function(e){
-    var $form = $(this).closest('form');
-    e.preventDefault();
-    $('#dialog').modal({ backdrop: 'static', keyboard: false })
-      .one('click', '#confirm-delete', function(e){
-        var hearsay = $(this);
-        $.ajax({
-          method: 'delete',
-          url: '/api/hearsays/' + hearsay.data('id'),
-          success: function(){
-            $(this).remove();
-            $form.trigger('submit');
-            updateHearsaysAndViews();
-          }
-        });
-      });
-    });
-  };
+ $('body').on('click', '#delete-hearsay', function(e){
+   e.preventDefault();
+   var hearsay = $(this);
+   $.ajax({
+     method: 'delete',
+     url: '/api/hearsays/' + hearsay.data('id'),
+     success: function(){
+       $(this).remove();
+       updateHearsaysAndViews();
+     }
+   });
+ });
+}
 
 // ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
 // Acquire input values from the form to update the user's password
