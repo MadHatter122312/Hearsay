@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // ~~~~~~~~~~MODULES~~~~~~~~~~~~~ //
 var express = require('express');
 var router = express.Router();
@@ -65,5 +64,3 @@ router.post('/authenticate', function(req, res){  // POST /api/user
 
 // ~~~~~~~~~~EXPORTS~~~~~~~~~~~~~ //
 module.exports = router;
-=======
->>>>>>> start anew
