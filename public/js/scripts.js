@@ -418,8 +418,12 @@ $(function(){
       success: function(data){
         console.log(data);
         var hearsays = data.hearsays;
-        var $list = $('#hearsay-list');
-        renderHearsayList(hearsays, $list);
+        console.log(hearsays);
+        var source = $('#hearsays-template').html();
+        var template = Handlebars.compile(source);
+        var compiledHtml = template(data);
+        $('#hearsay-list').empty();
+        $('#hearsay-list').append(compiledHtml);
       }
     });
   });
