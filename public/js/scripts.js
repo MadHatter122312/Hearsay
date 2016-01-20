@@ -56,6 +56,23 @@ function getAllHearsays(callback){
   });
 }
 
+function getCats(callback){
+  callback = callback || function(){};
+  $.ajax({
+    url: 'http://random.cat/meow',
+    success: function(data){
+      var cats = data.cats || [];
+      callback(cats);
+      var source = $('#cat-template').html();
+      var template = Handlebars.compile(source);
+      var catResult = data;
+      var compiledHtml = template(catResult);
+      $('#cat-picture').empty();
+      $('#cat-picture').append(compiledHtml);
+    }
+  });
+}
+
 // ~~~~~~~~~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~~~~~~~~~ //
 // Send a request to create a User
 function createUser(userData, callback) {
@@ -129,6 +146,18 @@ Handlebars.registerHelper('toHuman', function(date){
   return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
 });
 
+// Render Delete button through Handlebars
+Handlebars.registerHelper('delete_button', function(hearsay){
+ var hearsayID = this._id;
+ var hearsayUser = this.username;
+ var cookieUser = $.cookie('username');
+ console.log(cookieUser);
+ if(hearsayUser === cookieUser){
+   return '<button class="delete-hearsay btn btn-default" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"> Delete </button>'
+ } else {
+   console.log('You are not OP');
+ }
+});
 
 // Render Hearsays
 function renderHearsay(hearsay){
@@ -186,38 +215,18 @@ function updateHearsaysAndViews(){
 
 // ~~~~~~~~~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~~~~~~~ //
 function removeHearsay(){
- $('body').on('click', '#delete-hearsay', function(e){
-    e.preventDefault();
-    var hearsay = $(this);
-    var hearsayBody = hearsay.prev().text();
-    console.log($.cookie('token'));
-    getAllHearsays(function(hearsays){
-      console.log(hearsays);
-      for(var i = 0; i < hearsays.length; i ++){
-        var hearsayIndex = hearsays[i];
-        if(hearsayIndex.body === hearsayBody){
-          var hearsayUser = hearsayIndex.username;
-          getAllUsers(function(users){
-            for(var i = 0; i < users.length; i++){
-              var userIndex = users[i];
-              if(hearsayUser === userIndex.username && userIndex.token === $.cookie('token')){
-                $.ajax({
-                   method: 'delete',
-                   url: '/api/hearsays/' + hearsay.data('id'),
-                   success: function(){
-                    $(this).remove();
-                   }
-                });
-              } else {
-                console.log('YOU ARE NOT OP');
-              }
-            }
-          });
-        } else {
-          console.log('Somehow it does not exists');
+$('body').on('click', '.delete-hearsay', function(e){
+   e.preventDefault();
+   var $hearsay = $(this).parents('.hearsay');
+   var hearsayID = $(this).attr('id');
+     $.ajax({
+        method: 'delete',
+        data: {hearsay: hearsayID},
+        url: '/api/hearsays/' + hearsayID,
+        success: function(){
+         $hearsay.remove();
         }
-      }
-    });
+     });
  });
 }
 
@@ -343,6 +352,7 @@ function logInUser(usernameAttempt, passwordAttempt, callback) {
     data: {username: usernameAttempt, password: passwordAttempt},
     success: function(data){
       $.cookie('token', data.token);
+      $.cookie('user', data.username);
       callback(data);
     }
   });
@@ -366,6 +376,7 @@ function setLogInFormHandler(){
     logInUser(usernameAttempt, passwordAttempt, function(data){
 
       $.cookie('token', data.token);
+      $.cookie('username', data.username);
       $('#user-manager').hide();
       $('#hearsay-generator').show();
       console.log('Token:', $.cookie('token') );
@@ -380,6 +391,7 @@ function setLogOutHandler(){
   $('form#log-out').on('submit', function(e){
     e.preventDefault();
     $.removeCookie('token');
+    $.removeCookie('username');
     updateHearsaysAndViews();
     location.reload();
   });
@@ -399,11 +411,13 @@ $(function(){
     $('input#search-field').show();
     $('form#log-in').hide();
     $('#user-manager').hide();
+    getCats();
     setHearsayFormHandler();
     setCommentFormHandler();
     setLogOutHandler();
     updateHearsaysAndViews();
     removeHearsay();
+    setUpdateUserFormHandler();
   } else {
     $('.update-password').hide();
     $('form#log-in').show();
@@ -416,11 +430,15 @@ $(function(){
     setLogInFormHandler();
   }
 
-  // $('#delete-hearsay').click(function(){
-  //   if (!confirm("Are you sure?")){
-  //     return false;
-  //   }
-  // });
+
+  $('body').on('click', '#edit-user-button', function(e){
+   e.preventDefault();
+   console.log('hey its the modal button');
+   });
+
+  $('body').on('click', '#cat-picture img', function(){
+    getCats();
+  });
 
   $('input#search-field').on('keyup', function(){
     var searchText = $(this).val();

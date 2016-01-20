@@ -39,7 +39,7 @@ router.get('/:id/comments', function(req, res, next){
 // POST
 router.post('/', function(req, res, next){
   console.log('creating');
-  console.log(req.user.location);
+  // console.log(req.user.location);
   var hearsayData = req.body.hearsay;
   var hearsay = new Hearsay(hearsayData);
   hearsay.username = req.user.username;

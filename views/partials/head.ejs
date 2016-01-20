@@ -2,10 +2,12 @@
 <title>Project Hearsay</title>
 <link href="/css/styles.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js" charset="utf-8"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/citiesandstates.js"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
 
@@ -34,58 +36,65 @@
 
 <!--  Templates -->
 <script id="hearsays-template" type="text/x-handlebars-template">
-  {{#each hearsays}}
-    <div class="hearsay content-block">
-      <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
-      <h2 class="username"> {{ this.username }} </h2>
-      <p class="body">
-        {{ this.body }}
-      </p>
-      <button class="btn btn-default" id="delete-hearsay" data-toggle="modal" data-target="#dialog" style="visibility: visible;"> Delete </button>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editUserModal">Edit User</button>
-      <form class="form-inline" id="comment-generator">
-        <div class="form-inline">
-          <input type="hidden" name="hearsay-id" value={{this._id}}>
-          <input class="form-control" type="text" name="body" placeholder="comment">
-          <input class="btn btn-default" type="submit" id="comment-submit">
-        </div>
-      </form>
-      {{#each this.comment}}
-      <section class="comment-list">
-          <div class="comment">
-            <h4 class="comment-username"> {{this.username}} </h4>
-            <p class="comment-body"> {{this.body}} </p>
-          </div>
-      </section>
-       {{/each}}
-    </div>
-  {{/each}}
+ {{#each hearsays}}
+   <div class="hearsay content-block">
+     <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
+     <h2 class="username"> {{ this.username }} </h2>
+     <p class="body">
+       {{ this.body }}
+     </p>
+     {{{delete_button this}}}
+     <form class="form-inline" id="comment-generator">
+       <div class="form-inline">
+         <input type="hidden" name="hearsay-id" value={{this._id}}>
+         <input class="form-control" type="text" name="body" placeholder="comment">
+         <input class="btn btn-default" type="submit" id="comment-submit">
+       </div>
+     </form>
+     {{#each this.comment}}
+     <section class="comment-list">
+         <div class="comment">
+           <h4 class="comment-username"> {{this.username}} </h4>
+           <p class="comment-body"> {{this.body}} </p>
+         </div>
+     </section>
+      {{/each}}
+   </div>
+ {{/each}}
 </script>
 
 <script id="search-template" type="text/x-handlebars-template">
-  {{#each hearsays}}
-    <div class="hearsay content-block">
-      <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
-      <h2 class="username"> {{ this.username }} </h2>
-      <p class="body">
-        {{ this.body }}
-      </p>
-      <button class="btn btn-default" id="delete-hearsay" data-toggle="modal" data-target="#dialog" style="visibility: visible;"> Delete </button>
-      <form class="form-inline" id="comment-generator">
-        <div class="form-inline">
-          <input type="hidden" name="hearsay-id" value={{this._id}}>
-          <input class="form-control" type="text" name="body" placeholder="comment">
-          <input class="btn btn-default" type="submit" id="comment-submit">
-        </div>
-      </form>
-      {{#each this.comment}}
-      <section class="comment-list">
-          <div class="comment">
-            <h4 class="comment-username"> {{this.username}} </h4>
-            <p class="comment-body"> {{this.body}} </p>
-          </div>
-      </section>
-       {{/each}}
+   {{#each hearsays}}
+   <div class="hearsay content-block">
+     <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
+     <h2 class="username"> {{ this.username }} </h2>
+     <p class="body">
+       {{ this.body }}
+     </p>
+     {{{delete_button this}}}
+     <form class="form-inline" id="comment-generator">
+       <div class="form-inline">
+         <input type="hidden" name="hearsay-id" value={{this._id}}>
+         <input class="form-control" type="text" name="body" placeholder="comment">
+         <input class="btn btn-default" type="submit" id="comment-submit">
+       </div>
+     </form>
+     {{#each this.comment}}
+     <section class="comment-list">
+         <div class="comment">
+           <h4 class="comment-username"> {{this.username}} </h4>
+           <p class="comment-body"> {{this.body}} </p>
+         </div>
+     </section>
+      {{/each}}
+   </div>
+ {{/each}}
+</script>
+
+
+<script id="cat-template" type="text/x-handlebars-template">
+    <div class="cat-block">
+      <h3> Did someone hurt your feelings? </h3>
+      <img src={{ this.file }}>
     </div>
-  {{/each}}
 </script>

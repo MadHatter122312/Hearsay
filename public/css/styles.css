@@ -3,6 +3,7 @@
   margin: 0 auto;
 }
 
+
 form input{
   font-family: FontAwesome;
 }
@@ -11,6 +12,10 @@ form input{
   margin: 0 auto;
   width: 50%;
   text-align: center;
+}
+
+#user-manager-prompt{
+  z-index: 5;
 }
 
 .hearsay{
@@ -22,7 +27,6 @@ form input{
   border-radius: 5px;
   /*margin: 0 auto;*/
 }
-
 .hearsay .username{
   text-align: left;
 }
@@ -45,4 +49,25 @@ form input{
 
 #delete-hearsay{
   float: left;
+}
+
+.cat-block{
+  margin: 0;
+  margin-top: 4.3%;
+  width: 100%;
+  margin-left: 0;
+  padding: .2em;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+section#cat-picture{
+  width: 100%;
+}
+.cat-block img{
+  max-width: 90%;
+  max-height: 50%;
+}
+.image-cat{
+  width: 30%;
 }

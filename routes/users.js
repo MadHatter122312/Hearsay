@@ -52,7 +52,7 @@ router.post('/authenticate', function(req, res){  // POST /api/user
       databaseUser.authenticate(passwordAttempt, function(err, isMatch){
         if(isMatch){ // If the password matches
           databaseUser.setToken(err, function(){ // Create a new token for that user
-            res.json({description: 'success', token: databaseUser.token});
+            res.json({username: databaseUser.username, token: databaseUser.token});
           });
         }
       });
