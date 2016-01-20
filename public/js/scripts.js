@@ -206,7 +206,6 @@ function removeHearsay(){
                    url: '/api/hearsays/' + hearsay.data('id'),
                    success: function(){
                     $(this).remove();
-                    updateHearsaysAndViews();
                    }
                 });
               } else {
@@ -225,18 +224,30 @@ function removeHearsay(){
 // ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
 // Acquire input values from the form to update the user's password
 function setUpdateUserFormHandler(){
-  $('form#update-password').on('submit', function(e){
+  $('form#edit-user').on('submit', function(e){
     e.preventDefault();
+
+    var usernameField = $(this).find('input[name="user[username]"]');
+    var usernameText = usernameField.val();
+    usernameField.val('');
 
     var passwordField = $(this).find('input[name="password"]');
     var passwordText = passwordField.val();
     passwordField.val('');
 
-    var userData = {password: passwordText};
+    var stateField = $(this).find('select[name="user[state]"]');
+    var stateText = stateField.val();
+    stateField.val('');
+
+    var cityField = $(this).find('select[name="user[city]"]');
+    var cityText = cityField.val();
+    cityField.val('');
+
+    var userData = {username: usernameText, password: passwordText, location: cityText + ", " + stateText};
 
     updateUser(userData, function(user){
       console.log(user);
-      updateUsersAndView();
+      updateHearsaysAndViews();
     });
 
   });
