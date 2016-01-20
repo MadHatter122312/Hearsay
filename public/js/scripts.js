@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 console.log('...loaded');
 
 // ~~~~~~~~~~~~~~~~~~~~ BEAHVIORS ~~~~~~~~~~~~~~~~~~~~ //
@@ -540,3 +541,5 @@ $(function(){
 });
 =======
 >>>>>>> refresh js and head.ejs
+=======
+>>>>>>> start anew

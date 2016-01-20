@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Require modules
 var express = require('express');
 var router = express.Router();
@@ -100,3 +101,5 @@ router.delete('/:id', function(req, res){
 
 // Export module
 module.exports = router;
+=======
+>>>>>>> start anew
