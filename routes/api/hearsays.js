@@ -64,12 +64,31 @@ router.post('/:id/comments', function(req, res){
 });
 
 // PUT
-router.put('/:id', function(req, res){
-  console.log('updating');
-  Hearsay.findByIdAndUpdate(req.params.id, req.body.hearsay, {new:true}, function(err, hearsay){
-    res.json(hearsay);
+// router.patch('/:id', function(req, res){
+//   var hearsayData = req.hearsay.body;
+//   // var hearsayBody = req.body.hearsay;
+//   // var hearsayID = req.params.id
+//   // console.log('updating');
+//   Hearsay.findByIdAndUpdate(req.params.id, function(err, databaseHearsay){
+//     databaseHearsay.save(function(err){
+//       res.json({body: databaseHearsay.body})
+//     });
+//   });
+// });
+
+router.patch('/:id', function(req, res){ // PATCH /api/users
+    req.hearsay.body = req.body.hearsay.body; // Modify the users password
+
+    req.hearsay.save(function(err, databaseHearsay){ // Save the user
+      res.json(databaseHearsay); // Send the updated user as JSON
+    });
   });
-});
+
+
+//   Hearsay.findByIdAndUpdate(req.params.id, req.body.hearsay, {new:true}, function(err, hearsay){
+//     res.json(hearsay);
+//   });
+// });
 
 // DELETE
 router.delete('/:id', function(req, res){

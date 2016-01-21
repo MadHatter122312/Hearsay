@@ -1,6 +1,7 @@
 * {
-  text-align: center;
-  margin: 0 auto;
+  text-align: left;
+  margin-left: 1em;
+  /*margin: 0 auto;*/
 }
 
 
@@ -8,18 +9,52 @@ form input{
   font-family: FontAwesome;
 }
 
-.form-group{
-  margin: 0 auto;
-  width: 50%;
+header{
+  margin: 0 !important;
+}
+
+h1#logo{
+  margin: .4em !important;
+}
+
+h2.username{
+  margin: 0;
+}
+
+h5.location{
   text-align: center;
 }
 
-#user-manager-prompt{
-  z-index: 5;
+.container{
+  padding-left: 0em !important;
+  margin: 0 !important;
+}
+
+#header-things{
+  margin: 0;
+}
+
+.banner{
+  text-align: left;
+  padding-left: 0em;
+}
+
+form#search{
+  margin: 0 !important;
+  max-width: 60%;
+}
+
+form#log-out{
+  margin: 0 !important;
+}
+
+form#hearsay-generator{
+  border: 0;
+  max-width: 60%;
 }
 
 .hearsay{
-  max-width: 40%;
+  width: 45%;
   border: 1px solid lightgrey;
   margin-bottom: 1em;
   padding: .6em;
@@ -51,23 +86,131 @@ form input{
   float: left;
 }
 
-.cat-block{
-  margin: 0;
-  margin-top: 4.3%;
-  width: 100%;
-  margin-left: 0;
-  padding: .2em;
-  border-radius: 5px;
-  border: 1px solid lightgrey;
+h1#logo{
+  margin: .2em;
 }
 
-section#cat-picture{
-  width: 100%;
+.cat-block{
+  margin: 0;
+  padding-top: 2.5% !important;
+  /*width: 100%;*/
+  /*padding: .2em;*/
+  /*border-radius: 5px;
+  border: 1px solid lightgrey;*/
 }
+
+
+.delete-hearsay{
+  float: left;
+}
+.edit-hearsay{
+  float: left;
+  margin-left: .2em;
+  margin-right: .2em;
+}
+/*#cat-picture{
+  margin: 0 auto;
+  width: 25%;
+  position: fixed;
+  top: 0%;
+  left: auto;
+  /*margin-right: 0em;*/
+  /*bottom: auto;
+}*/
+
 .cat-block img{
   max-width: 90%;
-  max-height: 50%;
+  max-height: 40%;
+  padding-bottom: 1em;
 }
 .image-cat{
   width: 30%;
 }
+
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding: 0%;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    padding: 0;
+    position: fixed;
+    left: 30%;
+    width: 0;
+    height: 100%;
+    margin-left: -30%;
+    overflow-y: auto;
+    background-color: white;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 30%;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 1%;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0%;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left:30%;
+        -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    }
+
+    #wrapper.toggled {
+        padding-left: 10%;
+    }
+
+    #sidebar-wrapper {
+        width:20%;
+       /* overflow-y: auto;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;*/
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 0;
+        position: absolute;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: -10%;
+    }
+
+    .hearsay{
+      width: 70%;
+    }
+
+
+}
+

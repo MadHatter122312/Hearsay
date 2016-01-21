@@ -43,7 +43,7 @@
      <p class="body">
        {{ this.body }}
      </p>
-     {{{delete_button this}}}
+     {{{delete_button this}}} {{{edit_button this}}}
      <form class="form-inline" id="comment-generator">
        <div class="form-inline">
          <input type="hidden" name="hearsay-id" value={{this._id}}>
@@ -71,7 +71,7 @@
      <p class="body">
        {{ this.body }}
      </p>
-     {{{delete_button this}}}
+     {{{delete_button this}}} {{{edit_button this}}}
      <form class="form-inline" id="comment-generator">
        <div class="form-inline">
          <input type="hidden" name="hearsay-id" value={{this._id}}>
@@ -94,7 +94,7 @@
 
 <script id="cat-template" type="text/x-handlebars-template">
     <div class="cat-block">
-      <h3> Did someone hurt your feelings? </h3>
+      <h3 id="cat-h3"> Did someone hurt your feelings? </h3>
       <img src={{ this.file }}>
     </div>
 </script>

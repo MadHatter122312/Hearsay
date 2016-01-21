@@ -153,9 +153,22 @@ Handlebars.registerHelper('delete_button', function(hearsay){
  var cookieUser = $.cookie('username');
  console.log(cookieUser);
  if(hearsayUser === cookieUser){
-   return '<button class="delete-hearsay btn btn-default" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"> Delete </button>'
+   return '<button class="delete-hearsay btn btn-danger" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"> Delete </button>'
  } else {
    console.log('You are not OP');
+ }
+});
+
+// Render Edit button through Handlebars
+Handlebars.registerHelper('edit_button', function(hearsay){
+ var hearsayID = this._id;
+ var hearsayUser = this.username;
+ var cookieUser = $.cookie('username');
+ console.log(cookieUser);
+ if(hearsayUser === cookieUser){
+   return '<button class="edit-hearsay btn btn-primary" id="'+hearsayID+'" data-toggle="modal" data-target="#editHearsayModal"> Edit </button>'
+ } else {
+   console.log('Only OP can edit that');
  }
 });
 
@@ -187,6 +200,36 @@ function updateUser(userData, callback){
     }
   });
 }
+
+// Send request to update a Hearsay
+function updateHearsay(){
+  $('body').on('click', '#submit-edit-hearsay', function(e){
+   e.preventDefault();
+   var $hearsay = $(this).parents('.hearsay');
+   // var hearsayID = $(this).attr('id');
+   var hearsayBody = $(this).body;
+     $.ajax({
+        method: 'patch',
+        data: {hearsay: hearsayBody},
+        url: '/api/hearsays/',
+        success: function(){
+          console.log('hearsay updated');
+        }
+      });
+  });
+}
+// function updateHearsay(){
+//   $('body').on('click', '#submit-edit-hearsay', function(e){
+//     e.preventDefault();
+//     $.ajax({
+//       method: 'patch',
+//       url: '/api/hearsays'
+//       data: {hearsay: hearsayData},
+//       success: function(){
+//         console.log('hmm');
+//       }
+//     })
+// }
 
 //Render Users And View
 function updateUsersAndView(){
@@ -231,6 +274,26 @@ $('body').on('click', '.delete-hearsay', function(e){
 }
 
 // ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
+// Acquire input values from the form to update a hearsay
+function setUpdateHearsayFormHandler(){
+  $('form#edit-hearsay').on('submit', function(e){
+    e.preventDefault();
+
+    var hearsayBodyField = $(this).find('input[name="hearsay[body]"]');
+    var hearsayBodyText = hearsayBodyField.val();
+    hearsayBodyField.val('');
+
+    var hearsayData = {body: hearsayBodyText};
+    console.log('editHearsayData', editHearsayData);
+
+    getAllHearsays(hearsayData, function(hearsay){
+    });
+  });
+}
+
+
+
+
 // Acquire input values from the form to update the user's password
 function setUpdateUserFormHandler(){
   $('form#edit-user').on('submit', function(e){
@@ -397,6 +460,27 @@ function setLogOutHandler(){
   });
 };
 
+// ~~~~~~~~~~~~~~~~~~~~ SET SEARCH ~~~~~~~~~~~~~~~~~~~~ //
+
+function setSearchHandler(){
+ $('input#search-field').on('keyup', function(){
+   var searchText = $(this).val();
+     $.ajax({
+     url: '/api/hearsays?search=' + searchText,
+     success: function(data){
+       console.log(data);
+       var hearsays = data.hearsays;
+       console.log(hearsays);
+       var source = $('#hearsays-template').html();
+       var template = Handlebars.compile(source);
+       var compiledHtml = template(data);
+       $('#hearsay-list').empty();
+       $('#hearsay-list').append(compiledHtml);
+     }
+   });
+ });
+}
+
 
 
 // ~~~~~~~~~~~~~~~~~~~~ DOCUMENT READY FUNCTION ~~~~~~~~~~~~~~~~~~~~ //
@@ -418,6 +502,7 @@ $(function(){
     updateHearsaysAndViews();
     removeHearsay();
     setUpdateUserFormHandler();
+    setSearchHandler();
   } else {
     $('.update-password').hide();
     $('form#log-in').show();
@@ -431,6 +516,11 @@ $(function(){
   }
 
 
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+
   $('body').on('click', '#edit-user-button', function(e){
    e.preventDefault();
    console.log('hey its the modal button');
@@ -440,22 +530,10 @@ $(function(){
     getCats();
   });
 
-  $('input#search-field').on('keyup', function(){
-    var searchText = $(this).val();
-      $.ajax({
-      url: '/api/hearsays?search=' + searchText,
-      success: function(data){
-        console.log(data);
-        var hearsays = data.hearsays;
-        console.log(hearsays);
-        var source = $('#hearsays-template').html();
-        var template = Handlebars.compile(source);
-        var compiledHtml = template(data);
-        $('#hearsay-list').empty();
-        $('#hearsay-list').append(compiledHtml);
-      }
-    });
+  $(".btn").mouseup(function(){
+    $(this).blur();
   });
+
 
 
 });
