@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <meta charset="utf-8">
 <title>Project Hearsay</title>
 <link href="/css/styles.css" rel="stylesheet">
@@ -42,7 +41,7 @@
      <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
      <h2 class="username"> {{ this.username }} </h2>
      <p class="body">
-       {{ this.body }}
+       {{ this.bodyText }}
      </p>
      {{{delete_button this}}} {{{edit_button this}}}
      <form class="form-inline" id="comment-generator">
@@ -56,7 +55,7 @@
      <section class="comment-list">
          <div class="comment">
            <h4 class="comment-username"> {{this.username}} </h4>
-           <p class="comment-body"> {{this.body}} </p>
+           <p class="comment-body"> {{this.bodyText}} </p>
          </div>
      </section>
       {{/each}}
@@ -70,7 +69,7 @@
      <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
      <h2 class="username"> {{ this.username }} </h2>
      <p class="body">
-       {{ this.body }}
+       {{ this.bodyText }}
      </p>
      {{{delete_button this}}} {{{edit_button this}}}
      <form class="form-inline" id="comment-generator">
@@ -84,7 +83,7 @@
      <section class="comment-list">
          <div class="comment">
            <h4 class="comment-username"> {{this.username}} </h4>
-           <p class="comment-body"> {{this.body}} </p>
+           <p class="comment-body"> {{this.bodyText}} </p>
          </div>
      </section>
       {{/each}}
@@ -99,5 +98,3 @@
       <img src={{ this.file }}>
     </div>
 </script>
-=======
->>>>>>> refresh and prep for merge

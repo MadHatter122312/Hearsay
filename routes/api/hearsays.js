@@ -9,7 +9,7 @@ var Hearsay = require('../../models/hearsay');
 router.get('/', function(req, res){
   if(req.query.search){
     var searchTerm = req.query.search;
-    Hearsay.find({body: new RegExp(searchTerm, 'i') }, function(err, databaseHearsays){
+    Hearsay.find({bodyText: new RegExp(searchTerm, 'i') }, function(err, databaseHearsays){
       res.json( {hearsays: databaseHearsays})
     });
   } else {
@@ -76,14 +76,16 @@ router.post('/:id/comments', function(req, res){
 //   });
 // });
 
-router.patch('/:id', function(req, res){ // PATCH /api/users
-    req.hearsay.body = req.body.hearsay.body; // Modify the users password
+// UPDATE:  Update a user WITH the correct token
+router.patch('/:id', function(req, res){  // PATCH /api/users
+    req.hearsay.body = req.body.hearsay.bodyText; // Modify the users bio
 
-    req.hearsay.save(function(err, databaseHearsay){ // Save the user
-      res.json(databaseHearsay); // Send the updated user as JSON
+    Hearsay.findByIdAndUpdate(req.params.id, function(err, databaseHearsay){
+      databaseHearsay.save(function(err){
+        res.json({hearsay: databaseHearsay});
+      });
     });
-  });
-
+});
 
 //   Hearsay.findByIdAndUpdate(req.params.id, req.body.hearsay, {new:true}, function(err, hearsay){
 //     res.json(hearsay);

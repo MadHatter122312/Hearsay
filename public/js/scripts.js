@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 console.log('...loaded');
 
 // ~~~~~~~~~~~~~~~~~~~~ BEAHVIORS ~~~~~~~~~~~~~~~~~~~~ //
@@ -125,17 +124,6 @@ function renderUsers(usersArray){
   return usersElement;
 }
 
-// function humanTime(date){
-//   date = date.split('');
-//   var day = date.slice(8, 10).join('');
-//   var month = date.slice(5, 7).join('');
-//   var year = date.slice(0, 4).join('');
-//   var hour = date.slice(11, 13).join('');
-//   var minute = date.slice(14, 16).join('');
-
-//   return month + '/' + day + '/' + year + ' ' + '|' + ' ' + (hour - 5) + ':' + minute;
-// }
-
 Handlebars.registerHelper('toHuman', function(date){
   date = date.split('');
   var day = date.slice(8, 10).join('');
@@ -202,35 +190,22 @@ function updateUser(userData, callback){
   });
 }
 
-// Send request to update a Hearsay
-function updateHearsay(){
-  $('body').on('click', '#submit-edit-hearsay', function(e){
-   e.preventDefault();
-   var $hearsay = $(this).parents('.hearsay');
-   // var hearsayID = $(this).attr('id');
-   var hearsayBody = $(this).body;
-     $.ajax({
-        method: 'patch',
-        data: {hearsay: hearsayBody},
-        url: '/api/hearsays/',
-        success: function(){
-          console.log('hearsay updated');
-        }
-      });
+// Update Hearsay body
+function updateHearsay(hearsayUpdateData, hearsayID, callback){
+  var hearsayData = hearsayUpdateData;
+  var hearsayIdNum = hearsayID;
+  callback = callback || function(){};
+  $.ajax({
+    method: 'patch',
+    url: '/api/hearsays' + hearsayIdNum,
+    data: {hearsay: hearsayData},
+    success: function(data){
+      console.log(data);
+      // callback(data);
+    }
   });
 }
-// function updateHearsay(){
-//   $('body').on('click', '#submit-edit-hearsay', function(e){
-//     e.preventDefault();
-//     $.ajax({
-//       method: 'patch',
-//       url: '/api/hearsays'
-//       data: {hearsay: hearsayData},
-//       success: function(){
-//         console.log('hmm');
-//       }
-//     })
-// }
+
 
 //Render Users And View
 function updateUsersAndView(){
@@ -277,22 +252,22 @@ $('body').on('click', '.delete-hearsay', function(e){
 // ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
 // Acquire input values from the form to update a hearsay
 function setUpdateHearsayFormHandler(){
-  $('form#edit-hearsay').on('submit', function(e){
+  $(document).on('click', '.edit-hearsay', function(e){
     e.preventDefault();
-
-    var hearsayBodyField = $(this).find('input[name="hearsay[body]"]');
-    var hearsayBodyText = hearsayBodyField.val();
-    hearsayBodyField.val('');
-
-    var hearsayData = {body: hearsayBodyText};
-    console.log('editHearsayData', editHearsayData);
-
-    getAllHearsays(hearsayData, function(hearsay){
-    });
+    console.log("clicking edit");
+    var hearsayID = $(this).attr('id');
+    $('#editHearsayModal').data('_id', hearsayID);
   });
+  $('body').on('submit', '#edit-hearsay'), function(e){
+    e.preventDefault();
+    var hearsayUpdateField = $(this).find('input[name="hearsay[bodyText]"]');
+    var hearsayUpdateText = hearsayUpdateField.val();
+    var hearsayID = $('#editHearsayModal').data('id');
+    var hearsayUpdateData = {bodyText: hearsayUpdateText};
+    hearsayUpdateField.val('');
+    updateHearsay(hearsayUpdateData, hearsayID);
+  }
 }
-
-
 
 
 // Acquire input values from the form to update the user's password
@@ -381,9 +356,9 @@ function setHearsayFormHandler(){
   $('form#hearsay-generator').on('submit', function(e){
     e.preventDefault();
     var formUsername = $(this).find('input[name="username"]').val(); //to be taken out later, testing purposes etc..
-    var $formElement = $(this).find('textarea[name="body"]');
+    var $formElement = $(this).find('textarea[name="bodyText"]');
     var formBody = $formElement.val();
-    var hearsayData = {body:formBody};
+    var hearsayData = {bodyText:formBody};
     createHearsay(hearsayData, function(hearsay){
       updateHearsaysAndViews();
     });
@@ -398,8 +373,8 @@ function setCommentFormHandler(){
 
     var hearsayID = $(this).find('input[name="hearsay-id"]').val();
     var formUsername = $(this).find('input[name="username"]').val(); //again to be taken out later, testing etc...
-    var formBody = $(this).find('input[name="body"]').val();
-    var commentData = {body:formBody};
+    var formBody = $(this).find('input[name="bodyText"]').val();
+    var commentData = {bodyText:formBody};
     console.log(commentData);
     createComment(hearsayID, commentData, function(comment){
       updateHearsaysAndViews();
@@ -500,8 +475,10 @@ $(function(){
     setHearsayFormHandler();
     setCommentFormHandler();
     setLogOutHandler();
+    setUpdateHearsayFormHandler();
     updateHearsaysAndViews();
     removeHearsay();
+    updateHearsay();
     setUpdateUserFormHandler();
     setSearchHandler();
   } else {
@@ -538,5 +515,3 @@ $(function(){
 
 
 });
-=======
->>>>>>> refresh and prep for merge
