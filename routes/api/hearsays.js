@@ -65,6 +65,7 @@ router.post('/:id/comments', function(req, res){
 
 // PUT
 router.put('/:id', function(req, res){
+<<<<<<< HEAD
  var hearsayBody = req.body.hearsay.bodyText;
  console.log(req.params.id)
  var hearsayID = req.params.id;
@@ -76,6 +77,19 @@ router.put('/:id', function(req, res){
    });
  });
  console.log('done')
+=======
+  var hearsayBody = req.body.hearsay.bodyText;
+  console.log(req.params.id)
+  var hearsayID = req.params.id;
+  Hearsay.findById(hearsayID, function(err, databaseHearsay){
+   databaseHearsay.bodyText = hearsayBody;
+    databaseHearsay.save(function(err){
+      if(err) console.log(err)
+      res.json({bodyText: databaseHearsay.bodyText});
+    });
+  });
+  console.log('done')
+>>>>>>> refresh for merge
 });
 
 // DELETE
