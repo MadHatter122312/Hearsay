@@ -368,13 +368,12 @@ function setHearsayFormHandler(){
 
 // Acquire input data from the comment form and create a comment using the acquired data
 function setCommentFormHandler(){
-  $('body').on('submit', 'form#comment-generator', function(e){
+  $(document).on('submit', 'form#comment-generator', function(e){
     e.preventDefault();
-
     var hearsayID = $(this).find('input[name="hearsay-id"]').val();
     var formUsername = $(this).find('input[name="username"]').val(); //again to be taken out later, testing etc...
     var formBody = $(this).find('input[name="bodyText"]').val();
-    var commentData = {bodyText:formBody};
+    var commentData = {bodyText: formBody};
     console.log(commentData);
     createComment(hearsayID, commentData, function(comment){
       updateHearsaysAndViews();
