@@ -54,7 +54,11 @@ form#hearsay-generator{
 }
 
 .hearsay{
+<<<<<<< HEAD
   width: 45%;
+=======
+  max-width: 70%;
+>>>>>>> update js and head.ejs
   border: 1px solid lightgrey;
   margin-bottom: 1em;
   padding: .6em;
