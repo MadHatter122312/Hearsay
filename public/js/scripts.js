@@ -1,4 +1,3 @@
-<<<<<<< ad179d8f3a53d3da057acb5c7e8f352118fc3e7f
 console.log('...loaded');
 
 // ~~~~~~~~~~~~~~~~~~~~ BEAHVIORS ~~~~~~~~~~~~~~~~~~~~ //
@@ -515,5 +514,3 @@ $(function(){
 
 
 });
-=======
->>>>>>> ready to merge for edit fix
