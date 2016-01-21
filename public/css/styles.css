@@ -51,7 +51,12 @@ form#hearsay-generator{
   border: 0;
   max-width: 60%;
 }
+/* LOCATION BUTTON SECTION */
+.location-button{
+  max-width: 70%;
+}
 
+/* HEARSAY SECTION */
 .hearsay{
 <<<<<<< HEAD
   width: 45%;
@@ -85,14 +90,18 @@ form#hearsay-generator{
   margin-left: .2em;
 }
 
-#delete-hearsay{
+.delete-hearsay{
   float: left;
 }
 
+<<<<<<< HEAD
 h1#logo{
   margin: .2em;
 }
 
+=======
+/* LEFT BAR SECTION */
+>>>>>>> refresh and prep for merge
 .cat-block{
   margin: 0;
   padding-top: 2.5% !important;

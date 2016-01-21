@@ -1320,4 +1320,21 @@ var myJson = {
         }
     });
 
+    $('body').on('click', '#edit-user-button', function(e){
+      e.preventDefault();
+      $.each(myJson.state, function(index, value) {
+          $("select#state-edit").append('<option value="'+value.name+'">'+value.name+'</option>');
+      });
+
+      $('select#state-edit').on('change', function(){
+          for(var i = 0; i < myJson.state.length; i++) {
+              if(myJson.state[i].name == $(this).val()){
+                  $('select#city-edit').html('<option value="000"> - Select City </option>');
+                  $.each(myJson.state[i].cities, function(index, value) {
+                      $('#city').append('<option value="'+value.name+'">'+value.name+'</option>');
+                  });
+              }
+          }
+      });
+    });
 });

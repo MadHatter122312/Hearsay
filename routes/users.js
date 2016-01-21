@@ -34,7 +34,6 @@ router.post('/', function(req, res){ // POST /api/users
 router.patch('/', function(req, res){ // PATCH /api/users
   if(req.user){ // If a user has been found via token
     req.user.password = req.body.user.password; // Modify the users password
-
     req.user.save(function(err, databaseUser){ // Save the user
       res.json(databaseUser); // Send the updated user as JSON
     });
@@ -52,7 +51,7 @@ router.post('/authenticate', function(req, res){  // POST /api/user
       databaseUser.authenticate(passwordAttempt, function(err, isMatch){
         if(isMatch){ // If the password matches
           databaseUser.setToken(err, function(){ // Create a new token for that user
-            res.json({username: databaseUser.username, token: databaseUser.token});
+            res.json({username: databaseUser.username, location: databaseUser.location, token: databaseUser.token});
           });
         }
       });
