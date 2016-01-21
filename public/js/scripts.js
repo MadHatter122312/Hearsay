@@ -142,7 +142,7 @@ Handlebars.registerHelper('delete_button', function(hearsay){
  var cookieUser = $.cookie('username');
  console.log(cookieUser);
  if(hearsayUser === cookieUser){
-   return '<button class="delete-hearsay btn btn-danger" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"> Delete </button>'
+   return '<i class="delete-hearsay fa fa-times" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"></i>'
  } else {
    console.log('You are not OP');
  }
@@ -155,7 +155,7 @@ Handlebars.registerHelper('edit_button', function(hearsay){
  var cookieUser = $.cookie('username');
  console.log(cookieUser);
  if(hearsayUser === cookieUser){
-   return '<button class="edit-hearsay btn btn-primary" id="'+hearsayID+'" data-toggle="modal" data-target="#editHearsayModal"> Edit </button>'
+   return '<i class="edit-hearsay fa fa-pencil-square-o" id="'+hearsayID+'" data-toggle="modal" data-target="#editHearsayModal"></i>'
  } else {
    console.log('Only OP can edit that');
  }
@@ -192,18 +192,19 @@ function updateUser(userData, callback){
 
 // Update Hearsay body
 function updateHearsay(hearsayUpdateData, hearsayID, callback){
-  var hearsayData = hearsayUpdateData;
-  var hearsayIdNum = hearsayID;
-  callback = callback || function(){};
-  $.ajax({
-    method: 'patch',
-    url: '/api/hearsays' + hearsayIdNum,
-    data: {hearsay: hearsayData},
-    success: function(data){
-      console.log(data);
-      // callback(data);
-    }
-  });
+ var hearsayData = hearsayUpdateData;
+ var hearsayIdNum = hearsayID;
+ callback = callback || function(){};
+ $.ajax({
+   method: 'put',
+   url: '/api/hearsays/' + hearsayIdNum,
+   data: {hearsay: hearsayData},
+   success: function(data){
+     console.log(data);
+     callback(data);
+     updateHearsaysAndViews();
+   }
+ });
 }
 
 
@@ -252,23 +253,25 @@ $('body').on('click', '.delete-hearsay', function(e){
 // ~~~~~~~~~~~~~~~~~~~~ SET FORMS ~~~~~~~~~~~~~~~~~~~~ //
 // Acquire input values from the form to update a hearsay
 function setUpdateHearsayFormHandler(){
-  $(document).on('click', '.edit-hearsay', function(e){
-    e.preventDefault();
-    console.log("clicking edit");
-    var hearsayID = $(this).attr('id');
-    $('#editHearsayModal').data('_id', hearsayID);
-  });
-  $('body').on('submit', '#edit-hearsay'), function(e){
-    e.preventDefault();
-    var hearsayUpdateField = $(this).find('input[name="hearsay[bodyText]"]');
-    var hearsayUpdateText = hearsayUpdateField.val();
-    var hearsayID = $('#editHearsayModal').data('id');
-    var hearsayUpdateData = {bodyText: hearsayUpdateText};
-    hearsayUpdateField.val('');
-    updateHearsay(hearsayUpdateData, hearsayID);
-  }
+ $(document).on('click', '.edit-hearsay', function(e){
+   e.preventDefault();
+   console.log("clicking edit");
+   var hearsayID = $(this).attr('id');
+   $('#edit-hearsay').addClass(hearsayID);
+ });
+ $('#submit-edit-hearsay').on('click', function(e){
+   e.preventDefault();
+   $('#editHearsayModal').modal('hide');
+   var hearsayUpdateField = $('#edit-hearsay').find('input[name="hearsay[bodyText]"]');
+   var hearsayUpdateText = hearsayUpdateField.val();
+   var hearsayID = $('#edit-hearsay').attr('class');
+   console.log(hearsayID);
+   var hearsayUpdateData = {bodyText: hearsayUpdateText};
+   console.log(hearsayUpdateData);
+   hearsayUpdateField.val('');
+   updateHearsay(hearsayUpdateData, hearsayID);
+ });
 }
-
 
 // Acquire input values from the form to update the user's password
 function setUpdateUserFormHandler(){
@@ -477,7 +480,6 @@ $(function(){
     setUpdateHearsayFormHandler();
     updateHearsaysAndViews();
     removeHearsay();
-    updateHearsay();
     setUpdateUserFormHandler();
     setSearchHandler();
   } else {
@@ -513,4 +515,4 @@ $(function(){
 
 
 
-});
+})

@@ -1,4 +1,4 @@
-<div class="user-manager-prompt">
+<div id="user-manager-prompt">
   <!-- SignUp -->
   <h4>Sign-Up</h4>
   <div class="container">
@@ -16,24 +16,26 @@
         <input class="form-control" type='password' name='user[password]' placeholder='Password'>
       </div>
       <label>State:</label>
-        <select id="state" name="user[state]">
+        <select class="form-control" id="state" name="user[state]">
           <option value="000">-Select State-</option>
         </select>
       <br />
       <label>City:</label>
-        <select id="city" name="user[city]">
+        <select class="form-control" id="city" name="user[city]">
           <option value="000">-Select City-</option>
         </select>
       <br />
       <div class="form-group" id="email">
         <input class="form-control" type='email' name='user[email]' placeholder='email'>
       </div>
-      <input type='submit'>
+      <input id="sign-up-submit" class="btn btn-default" type='submit'>
     </form>
   </div>
 </div>
 
-<div class="user-manager-prompt">
+<br>
+
+<div id="user-manager-prompt">
   <!-- Login -->
   <h4>Log-In</h4>
   <div class="container">

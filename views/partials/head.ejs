@@ -1,3 +1,4 @@
+
 <meta charset="utf-8">
 <title>Project Hearsay</title>
 <link href="/css/styles.css" rel="stylesheet">
@@ -14,87 +15,85 @@
 
 <!--  Templates -->
 <script id="users-template" type="text/x-handlebars-template">
-  {{#each users}}
-    <div class="hearsay content-block">
-      <h3> {{ this.username }} </h3>
-      <p>
-        {{ firstName }} {{ lastName }}
-      </p>
-      <p>
-        {{ email }}
-      </p>
-      <p>
-        {{ birthday }}
-      </p>
-      <p>
-        {{ location }}
-      </p>
-    </div>
-  {{/each}}
+ {{#each users}}
+   <div class="hearsay content-block">
+     <h3> {{ this.username }} </h3>
+     <p>
+       {{ firstName }} {{ lastName }}
+     </p>
+     <p>
+       {{ email }}
+     </p>
+     <p>
+       {{ birthday }}
+     </p>
+     <p>
+       {{ location }}
+     </p>
+   </div>
+ {{/each}}
 </script>
 
 
 <!--  Templates -->
 <script id="hearsays-template" type="text/x-handlebars-template">
- {{#each hearsays}}
-   <div class="hearsay content-block">
-     <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
-     <h2 class="username"> {{ this.username }} </h2>
-     <p class="body">
-       {{ this.bodyText }}
-     </p>
-     {{{delete_button this}}} {{{edit_button this}}}
-     <form class="form-inline" id="comment-generator">
-       <div class="form-inline">
-         <input type="hidden" name="hearsay-id" value={{this._id}}>
-         <input class="form-control" type="text" name="bodyText" placeholder="comment">
-         <input class="btn btn-default" type="submit" id="comment-submit">
-       </div>
-     </form>
-     {{#each this.comment}}
-     <section class="comment-list">
-         <div class="comment">
-           <h4 class="comment-username"> {{this.username}} </h4>
-           <p class="comment-body"> {{this.bodyText}} </p>
-         </div>
-     </section>
-      {{/each}}
-   </div>
- {{/each}}
+{{#each hearsays}}
+  <div class="hearsay content-block">
+    <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }}<span id="post-tools">{{{delete_button this}}} {{{edit_button this}}}</span></h5>
+    <h2 class="username"> {{ this.username }} </h2>
+    <p class="body">
+      {{ this.bodyText }}
+    </p>
+    <form class="form-inline" id="comment-generator">
+      <div class="form-inline">
+        <input type="hidden" name="hearsay-id" value={{this._id}}>
+        <input class="form-control" type="text" name="bodyText" placeholder="comment">
+        <input class="btn btn-default" type="submit" id="comment-submit">
+      </div>
+    </form>
+    {{#each this.comment}}
+    <section class="comment-list">
+        <div class="comment">
+          <h4 class="comment-username"> {{this.username}} </h4>
+          <p class="comment-body"> {{this.bodyText}} </p>
+        </div>
+    </section>
+     {{/each}}
+  </div>
+{{/each}}
 </script>
 
 <script id="search-template" type="text/x-handlebars-template">
-   {{#each hearsays}}
-   <div class="hearsay content-block">
-     <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }} </h5>
-     <h2 class="username"> {{ this.username }} </h2>
-     <p class="body">
-       {{ this.bodyText }}
-     </p>
-     {{{delete_button this}}} {{{edit_button this}}}
-     <form class="form-inline" id="comment-generator">
-       <div class="form-inline">
-         <input type="hidden" name="hearsay-id" value={{this._id}}>
-         <input class="form-control" type="text" name="body" placeholder="comment">
-         <input class="btn btn-default" type="submit" id="comment-submit">
-       </div>
-     </form>
-     {{#each this.comment}}
-     <section class="comment-list">
-         <div class="comment">
-           <h4 class="comment-username"> {{this.username}} </h4>
-           <p class="comment-body"> {{this.bodyText}} </p>
-         </div>
-     </section>
-      {{/each}}
-   </div>
- {{/each}}
+  {{#each hearsays}}
+  <div class="hearsay content-block">
+    <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }}<span id="post-tools">{{{delete_button this}}} {{{edit_button this}}}</span></h5>
+    <h2 class="username"> {{ this.username }} </h2>
+    <p class="body">
+      {{ this.bodyText }}
+    </p>
+    <form class="form-inline" id="comment-generator">
+      <div class="form-inline">
+        <input type="hidden" name="hearsay-id" value={{this._id}}>
+        <input class="form-control" type="text" name="body" placeholder="comment">
+        <input class="btn btn-default" type="submit" id="comment-submit">
+      </div>
+    </form>
+    {{#each this.comment}}
+    <section class="comment-list">
+        <div class="comment">
+          <h4 class="comment-username"> {{this.username}} </h4>
+          <p class="comment-body"> {{this.bodyText}} </p>
+        </div>
+    </section>
+     {{/each}}
+  </div>
+{{/each}}
 </script>
 
 
 <script id="cat-template" type="text/x-handlebars-template">
-    <div class="cat-block">
-      <h3 id="cat-h3"> Did someone hurt your feelings? </h3>
-      <img src={{ this.file }}>
-    </div>
+   <div class="cat-block">
+     <h3 id="cat-h3"> Did someone hurt your feelings? </h3>
+     <img src={{ this.file }}>
+   </div>
 </script>

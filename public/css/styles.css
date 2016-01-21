@@ -12,6 +12,29 @@ header{
   margin: 0 !important;
 }
 
+#sign-up{
+  max-width: 60% !important;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+#log-in{
+  max-width: 60%;
+  margin-left: 0 !important;
+}
+
+#state{
+  margin-left: 1em !important;
+}
+
+#city{
+  margin-left: 1em !important;
+}
+
+#sign-up-submit{
+  margin-left: 1em !important;
+}
+
 h1#logo{
   margin: .4em !important;
 }
@@ -21,7 +44,8 @@ h2.username{
 }
 
 h5.location{
-  text-align: center;
+  text-align: left;
+  margin: 0;
 }
 
 .container{
@@ -58,16 +82,8 @@ form#hearsay-generator{
 
 /* HEARSAY SECTION */
 .hearsay{
-<<<<<<< ad179d8f3a53d3da057acb5c7e8f352118fc3e7f
-<<<<<<< HEAD
-  width: 45%;
-=======
-  max-width: 70%;
->>>>>>> update js and head.ejs
-=======
-  max-width: 45%;
->>>>>>> ready to merge for edit fix
-  border: 1px solid lightgrey;
+  width: 50%;
+  /*border: 1px solid lightgrey;*/
   margin-bottom: 1em;
   padding: .6em;
   text-align: center;
@@ -76,6 +92,11 @@ form#hearsay-generator{
 }
 .hearsay .username{
   text-align: left;
+}
+
+form#comment-generator{
+  margin-left: 0 !important;
+  padding: 0 !important;
 }
 
 .hearsay .body{
@@ -94,18 +115,8 @@ form#hearsay-generator{
   margin-left: .2em;
 }
 
-.delete-hearsay{
-  float: left;
-}
-
-<<<<<<< HEAD
-h1#logo{
-  margin: .2em;
-}
-
-=======
 /* LEFT BAR SECTION */
->>>>>>> refresh and prep for merge
+
 .cat-block{
   margin: 0;
   padding-top: 2.5% !important;
@@ -117,13 +128,21 @@ h1#logo{
 
 
 .delete-hearsay{
-  float: left;
+  text-align: right;
 }
+
 .edit-hearsay{
+  text-align: right;
+}
+
+.post-tools{
+  text-align: right;
+}
+/*.edit-hearsay{
   float: left;
   margin-left: .2em;
   margin-right: .2em;
-}
+}*/
 /*#cat-picture{
   margin: 0 auto;
   width: 25%;
@@ -217,6 +236,7 @@ h1#logo{
     .hearsay{
       max-width: 70% !important;
     }
+
 
 
 }
