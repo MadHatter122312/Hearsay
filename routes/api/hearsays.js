@@ -1,3 +1,4 @@
+<<<<<<< ad179d8f3a53d3da057acb5c7e8f352118fc3e7f
 // Require modules
 var express = require('express');
 var router = express.Router();
@@ -86,3 +87,5 @@ router.delete('/:id', function(req, res){
 
 // Export module
 module.exports = router;
+=======
+>>>>>>> ready to merge for edit fix

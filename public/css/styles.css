@@ -58,11 +58,15 @@ form#hearsay-generator{
 
 /* HEARSAY SECTION */
 .hearsay{
+<<<<<<< ad179d8f3a53d3da057acb5c7e8f352118fc3e7f
 <<<<<<< HEAD
   width: 45%;
 =======
   max-width: 70%;
 >>>>>>> update js and head.ejs
+=======
+  max-width: 45%;
+>>>>>>> ready to merge for edit fix
   border: 1px solid lightgrey;
   margin-bottom: 1em;
   padding: .6em;
@@ -169,7 +173,7 @@ h1#logo{
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 30%;
+    width: 20%;
 }
 
 #page-content-wrapper {
@@ -183,26 +187,17 @@ h1#logo{
     margin-right: 0%;
 }
 
-@media(min-width:768px) {
+@media(min-width:480px) {
     #wrapper {
         padding-left:30%;
-        -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
     }
 
     #wrapper.toggled {
-        padding-left: 10%;
+        padding-left: 0;
     }
 
     #sidebar-wrapper {
-        width:20%;
-       /* overflow-y: auto;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;*/
+        width:30%;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -210,17 +205,17 @@ h1#logo{
     }
 
     #page-content-wrapper {
-        padding: 0;
-        position: absolute;
+        padding: 10px;
+        position: relative;
     }
 
     #wrapper.toggled #page-content-wrapper {
         position: relative;
-        margin-right: -10%;
+        margin-right: 0;
     }
 
     .hearsay{
-      width: 70%;
+      max-width: 70% !important;
     }
 
 
