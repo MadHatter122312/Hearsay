@@ -139,10 +139,6 @@ Handlebars.registerHelper('toHuman', function(date){
  return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
 });
 
-new messages
-[8:52]
-(hour - 5) to render it as EST for the time being
-
 // Render Option button for OP
 Handlebars.registerHelper('option_dropdown', function(hearsay){
  var hearsayID = this._id;
