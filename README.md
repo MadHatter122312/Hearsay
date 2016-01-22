@@ -3,12 +3,13 @@
   Hearsay is a single-page application, built with Node.js and Express, which allows the user to post rumors, secrets and comments anonymously.  Users can sort other users Hearsays by location and comment on them.
 ​
 2. USER STORIES
-  - As a user, I was able to create a profile and post a Hearsay(anonymous blog post) about a recent development in my city.
+  - As a user, I was able to create a profile and post a Hearsay about a recent development in my city.
+    ![Logging In](http://i.imgur.com/gRMqk2z.gif "Logging in")
   - As a user, I was able to view and respond to other Hearsays.
-  - As a user, I was able to comment on other users Hearsays and view randomly generated images of cats as I waited for other users to respond
-​
-  ![alt tag]//.png or .gif here//
-​
+    ![Commenting](http://i.imgur.com/AMA1Diz.gif "Posting a comment")
+  - As a user, I was able to comment on other users Hearsays and view randomly generated images of cats as I waited for other users to       respond
+    ![Cats!](http://i.imgur.com/QiwF3ir.gif "Cats!")
+
 3. TECHNOLOGIES
   - Node.js
   - Express
