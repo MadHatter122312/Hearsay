@@ -59,6 +59,7 @@ function getAllHearsays(callback){
 function getCats(callback){
   callback = callback || function(){};
   $.ajax({
+    method: 'get',
     url: 'https://random.cat/meow',
     success: function(data){
       var cats = data.cats || [];
@@ -543,9 +544,7 @@ $(function(){
     setCreateUserFormHandler();
     setLogInFormHandler();
   }
-
-  getCats();
-
+  
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -570,5 +569,7 @@ $(function(){
 
   fadeLogo();
   // scrollFade(); //
+
+  getCats();
 
 })
