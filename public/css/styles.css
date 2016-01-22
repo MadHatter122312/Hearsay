@@ -1,6 +1,138 @@
 * {
   text-align: left;
   /*margin: 0 auto;*/
+  font-family: 'Roboto Slab', serif;
+}
+
+/* NAVIGATION BAR */
+#header{
+  width: 100%;
+  z-index: 7000;
+}
+
+img#icon{
+  width: 40px;
+  margin-top: -10px;
+}
+
+a.navbar-brand{
+  font-size: 20px;
+  margin-left: -5px;
+}
+.option-bar{
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+.dropdown-menu{
+  padding-left: 5px;
+}
+
+a#signup-link:hover, a#login-link:hover, a#cat-toggle:hover{
+  background-color: rgb(238, 238, 238);
+  color: black;
+}
+
+div#signUpModal, div#loginModal, div#editUserModal, div#editHearsayModal, div#catModal{
+  top: 50px !important;
+}
+
+a.option-button{
+  width: 160px
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  text-align: right;
+}
+i{
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.username{
+  position: relative;
+  display: inline-block;
+  float: left;
+}
+
+.bodyText{
+  padding-left: 15px;
+}
+
+/* HOME PAGE SECTION */
+div.home-area{
+  position: absolute;
+  width: 100%;
+  height: 500px;
+  background-color: rgb(12, 16, 26);
+  margin-top: -20px;
+  z-index: -5;
+}
+
+img.trees{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: -1;
+  opacity: .2;
+}
+
+img.big-icon{
+  display: block;
+  max-height: 70%;
+  margin: 0 auto;
+  margin-top: 5%;
+  z-index: 6000;
+}
+
+img#white-owl{
+  position: absolute;
+  max-height: 60%;
+  margin-left: 50px;
+  bottom: 0;
+  filter: invert(1);
+  opacity: .6;
+}
+
+img#owl-eyes{
+  position: absolute;
+  z-index: 9000;
+  bottom: 170px;
+  left: 213px;
+  width: 65px;
+  opacity: .77;
+}
+/* ABOUT SECTION */
+div.about{
+  background-color: rgb(241, 241, 241);
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  color: white;
+  z-index: 5000;
+  top: 500px;
+}
+
+h1.about-title{
+  font-size: 50px;
+  color: black;
+  text-align: center;
+}
+
+p#about-text{
+  display: block;
+  margin: 0 auto;
+  font-size: 20px;
+  color: black;
+  width: 80%;
+}
+
+img#secret{
+  position: absolute;
+  width: 25%;
+  bottom: -10px;
+  right: 5%;
 }
 
 form input{
@@ -76,48 +208,11 @@ form#hearsay-generator{
 
 h5.location{
   margin-left: 0px;
-  margin-bottom: 15px;
 }
 
 .top-bar{
   position: relative;
   margin-bottom: 50px;
-}
-
-img#icon{
-  width: 45px;
-  margin-top: -12px;
-}
-
-.option-bar{
-  position: relative;
-  display: inline-block;
-  float: right;
-}
-.dropdown-menu{
-  padding-left: 5px;
-}
-a.option-button{
-  width: 160px
-  margin: 0;
-  padding: 0;
-  padding-left: 5px;
-  text-align: right;
-}
-i{
-  margin: 0;
-  padding: 0;
-  margin-right: 15px;
-}
-
-.username{
-  position: relative;
-  display: inline-block;
-  float: left;
-}
-
-.bodyText{
-  padding-left: 15px;
 }
 
 /* HEARSAY SECTION */
@@ -213,7 +308,8 @@ div.top-area{
   height: 250px;
   margin: 0 auto;
   margin-top: -20px;
-  background-color: rgba(244, 244, 244, 1);
+  background-image: url(/images/symphony.png);
+  border-bottom: 1px solid rgba(21, 22, 22, 0.36);
 }
 
 div.container.post-hearsay{
@@ -241,13 +337,21 @@ p.speech-text{
   font-size: 30px;
   margin-top: -160px;
   padding-top: 35px;
-  padding-left: 10px;
+  padding-left: 7px;
   z-index: 5;
   color: white;
   height: 130px;
   width: 190px;
 }
 /* MAIN BODY SECTION */
+div.form-inline{
+  margin-top: 5px;
+}
+
+#comment-submit{
+  margin-left: 0;
+}
+
 .body-area{
   position: absolute;
   margin: 0 auto;
@@ -270,6 +374,7 @@ div.hearsay.content-block{
   width: 50%;
   margin-left: 3em;
 }
+
 
 div.form-inline{
 
