@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var loadUser = require('./middleware/loadUser');
+require('dotenv').load();
 
 // Instance of Express
 var app = express();
