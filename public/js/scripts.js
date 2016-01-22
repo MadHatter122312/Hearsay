@@ -76,12 +76,15 @@ function getCats(callback){
 // ~~~~~~~~~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~~~~~~~~~ //
 // Send a request to create a User
 function createUser(userData, callback) {
+  callback = callback || function(){};
   $.ajax({
     method: 'post',
     url: 'api/users',
     data: {user: userData},
     success: function(data){
-      callback(data)
+      var usernameAttempt = data.username;
+      var passwordAttempt = data.password;
+      callback(data);
     }
   });
 }
@@ -138,10 +141,6 @@ Handlebars.registerHelper('toHuman', function(date){
 
  return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
 });
-
-new messages
-[8:52]
-(hour - 5) to render it as EST for the time being
 
 // Render Option button for OP
 Handlebars.registerHelper('option_dropdown', function(hearsay){
@@ -367,11 +366,16 @@ function setCreateUserFormHandler(){
 
     // Organize the data to be sent
     var userData = {firstName: firstNameText, lastName: lastNameText, email: emailText, username: usernameText, password: passwordText, location: cityText + ", " + stateText};
-    console.log('userdata', userData);
 
     // Create a new user
     createUser(userData, function(user){
     });
+    // Log in this new user
+    logInUser(usernameText, passwordText, function(data){
+      updateHearsaysAndViews();
+      location.reload();
+    });
+
   });
 }
 
@@ -408,6 +412,7 @@ function setCommentFormHandler(){
 // ~~~~~~~~~~~~~~~~~~~~ LOGIN / LOGOUT ~~~~~~~~~~~~~~~~~~~~ //
 // Send a request to LogIn
 function logInUser(usernameAttempt, passwordAttempt, callback) {
+  callback = callback || function(){};
   $.ajax({
     method: 'post',
     url: '/api/users/authenticate',
@@ -415,6 +420,7 @@ function logInUser(usernameAttempt, passwordAttempt, callback) {
     success: function(data){
       $.cookie('token', data.token);
       $.cookie('user', data.username);
+      $.cookie('location', data.location);
       callback(data);
     }
   });
@@ -436,12 +442,6 @@ function setLogInFormHandler(){
     var userData = {username: usernameAttempt, password: passwordAttempt};
 
     logInUser(usernameAttempt, passwordAttempt, function(data){
-
-      $.cookie('token', data.token);
-      $.cookie('username', data.username);
-      $('#user-manager').hide();
-      $('#hearsay-generator').show();
-      console.log('Token:', $.cookie('token') );
       updateHearsaysAndViews();
       location.reload();
     });
@@ -453,7 +453,8 @@ function setLogOutHandler(){
   $('#logout-link').on('click', function(e){
     e.preventDefault();
     $.removeCookie('token');
-    $.removeCookie('username');
+    $.removeCookie('user');
+    $.removeCookie('location');
     updateHearsaysAndViews();
     location.reload();
   });
@@ -482,9 +483,9 @@ function setSearchHandler(){
 
 // ~~~~~~~~~~~~~~~~~~~~ LOGO ANIMATION ~~~~~~~~~~~~~~~~~~~~ //
 function fadeLogo(){
-  $('.big-icon').fadeOut(1); //hide
+  $('.big-icon').hide(); //hide
   $('.big-icon').fadeIn(5000);
-  $('img#owl-eyes').fadeOut(1).delay(3000);
+  $('img#owl-eyes').hide().delay(3000);
   $('img#owl-eyes').fadeIn(100).fadeOut(100).fadeIn(100).delay(4000);
   pulsate($('img#owl-eyes'));
 
@@ -527,7 +528,7 @@ $(function(){
     removeHearsay();
     setUpdateUserFormHandler();
     setSearchHandler();
-    $('#username-nav').text($.cookie('username'));
+    $('#username-nav').text($.cookie('user'));
   } else {
     $('.update-password').hide();
     $('form#log-in').show();
