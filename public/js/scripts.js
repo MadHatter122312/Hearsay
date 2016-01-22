@@ -568,6 +568,6 @@ $(function(){
   });
 
   fadeLogo();
-  // scrollFade();
+  // scrollFade(); //
 
 })
