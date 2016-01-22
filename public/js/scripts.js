@@ -60,7 +60,7 @@ function getCats(callback){
   callback = callback || function(){};
   $.ajax({
     method: 'get',
-    url: 'https://random.cat/meow',
+    url: ''+'https://random.cat/meow'+'',
     success: function(data){
       var cats = data.cats || [];
       callback(cats);
@@ -544,7 +544,7 @@ $(function(){
     setCreateUserFormHandler();
     setLogInFormHandler();
   }
-  
+
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
