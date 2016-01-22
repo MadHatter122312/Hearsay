@@ -21,7 +21,7 @@ Got a secret? Something you need to get off your chest? Create a Project Hearsay
   - JavaScript/jQuery
   - MongoDB
   - Bootstrap
-​
+  
 4. INSTALLATION INSTRUCTIONS AND REQUIREMENTS
   Hearsay has the following npm dependencies:
     -bcrypt
