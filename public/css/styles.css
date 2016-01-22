@@ -167,6 +167,10 @@ form#comment-generator{
   border: 1px solid lightgrey;*/
 }
 
+.modal-backdrop{
+   opacity:0.9 !important;
+}
+
 
 .delete-hearsay{
   text-align: right;
@@ -227,23 +231,21 @@ img.owl{
   width: 100px;
   float: right;
   right: 13em;
-  top: 210px;
-}
-img.speech-bubble{
-  float: right;
-  margin-top: -180px;
-  margin-right: 3em;
-  width: 22%;
-  z-index: 2;
+  margin-top: -65px;
 }
 
 p.speech-text{
+  background-image: url(/images/bubble.png);
+  background-repeat: no-repeat;
   float:right;
   font-size: 30px;
-  margin-top: -140px;
-  margin-right: 2em;
+  margin-top: -160px;
+  padding-top: 35px;
+  padding-left: 10px;
   z-index: 5;
   color: white;
+  height: 130px;
+  width: 190px;
 }
 /* MAIN BODY SECTION */
 .body-area{

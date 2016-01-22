@@ -497,6 +497,7 @@ $(function(){
     removeHearsay();
     setUpdateUserFormHandler();
     setSearchHandler();
+    $('#username-nav').text($.cookie('username'));
   } else {
     $('.update-password').hide();
     $('form#log-in').show();
