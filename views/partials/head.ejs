@@ -1,5 +1,7 @@
 <meta charset="utf-8">
 <title>Project Hearsay</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=IM+Fell+English' rel='stylesheet' type='text/css'>
 <link href="/css/styles.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -15,15 +17,17 @@
 <script id="hearsays-template" type="text/x-handlebars-template">
 {{#each hearsays}}
   <div class="hearsay content-block">
-    <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }}</h5>
+    <h5 class="location"> <strong>Someone</strong> posted in</br> {{ this.location }} at {{ toHuman this.createdAt }}</h5>
     <div class="top-bar">
-      <h2 class="username"> {{ this.username }} </h2>
+      <h2 class="username">  </h2>
       {{{option_dropdown this}}}
     </div>
     <p class="body bodyText">
       {{ this.bodyText }}
     </p>
-    <hr>
+    <div class="line">
+
+    </div>
     <form class="form-inline" id="comment-generator">
       <div class="form-inline">
         <input type="hidden" name="hearsay-id" value={{this._id}}>
@@ -31,7 +35,6 @@
         <input class="btn btn-default" type="submit" id="comment-submit">
       </div>
     </form>
-    <hr>
     {{#each this.comment}}
     <section class="comment-list">
         <div class="comment">

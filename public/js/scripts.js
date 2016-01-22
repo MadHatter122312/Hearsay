@@ -125,15 +125,23 @@ function renderUsers(usersArray){
 }
 
 Handlebars.registerHelper('toHuman', function(date){
-  date = date.split('');
-  var day = date.slice(8, 10).join('');
-  var month = date.slice(5, 7).join('');
-  var year = date.slice(0, 4).join('');
-  var hour = date.slice(11, 13).join('');
-  var minute = date.slice(14, 16).join('');
+ date = date.split('');
+ var day = date.slice(8, 10).join('');
+ var month = date.slice(5, 7).join('');
+ var year = date.slice(0, 4).join('');
+ var hour = date.slice(11, 13).join('');
+ var minute = date.slice(14, 16).join('');
 
-  return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
+ if (parseInt(hour) > 12){
+   hour-=12;
+ }
+
+ return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
 });
+
+new messages
+[8:52]
+(hour - 5) to render it as EST for the time being
 
 // Render Option button for OP
 Handlebars.registerHelper('option_dropdown', function(hearsay){
@@ -472,6 +480,28 @@ function setSearchHandler(){
  });
 }
 
+// ~~~~~~~~~~~~~~~~~~~~ LOGO ANIMATION ~~~~~~~~~~~~~~~~~~~~ //
+function fadeLogo(){
+  $('.big-icon').fadeOut(1);
+  $('.big-icon').fadeIn(5000);
+  $('img#owl-eyes').fadeOut(1).delay(3000);
+  $('img#owl-eyes').fadeIn(100).fadeOut(100).fadeIn(100).delay(4000);
+  pulsate($('img#owl-eyes'));
+
+}
+function pulsate(element){
+    $(element || this).fadeOut(100).fadeIn(100).delay(4000).fadeOut(100, pulsate);
+}
+
+// function scrollFade(){
+//   $(window).scroll(function () {
+//     var scrollTop = $(window).scrollTop();
+//     var height = $(window).height();
+//     $('.big-icon').css({
+//         'opacity': ((height - scrollTop) / height)
+//     });
+//   });
+// }
 
 
 // ~~~~~~~~~~~~~~~~~~~~ DOCUMENT READY FUNCTION ~~~~~~~~~~~~~~~~~~~~ //
@@ -488,7 +518,7 @@ $(function(){
     $('#user-manager').hide();
     $('#login-link').hide();
     $('#signup-link').hide();
-    getCats();
+    $('.home-area').hide();
     setHearsayFormHandler();
     setCommentFormHandler();
     setLogOutHandler();
@@ -513,11 +543,16 @@ $(function(){
     setLogInFormHandler();
   }
 
+  getCats();
 
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });
+
+  $('#signup-link, #login-link, #logout-link, #cat-toggle').on('click', function(){
+    $('.navbar-toggle').click();
+  })
 
   $('body').on('click', '#edit-user-button', function(e){
    e.preventDefault();
@@ -532,6 +567,7 @@ $(function(){
     $(this).blur();
   });
 
-
+  fadeLogo();
+  // scrollFade();
 
 })
