@@ -538,7 +538,7 @@ $(function(){
     $('form.navbar-form').hide();
     $('a.dropdown-toggle').hide();
     $('#logout-link').hide();
-    $('.top-area').hide();
+    $('div.top-area').hide();
     setCreateUserFormHandler();
     setLogInFormHandler();
   }
