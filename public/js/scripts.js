@@ -136,7 +136,7 @@ Handlebars.registerHelper('toHuman', function(date){
    hour-=12;
  }
 
- return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
+ return (hour + 7) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
 });
 
 // Render Option button for OP
