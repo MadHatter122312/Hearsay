@@ -1,0 +1,312 @@
+* {
+  text-align: left;
+  /*margin: 0 auto;*/
+}
+
+form input{
+  font-family: FontAwesome;
+}
+
+header{
+  margin: 0 !important;
+}
+
+#sign-up{
+  max-width: 60% !important;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+#log-in{
+  max-width: 60%;
+  margin-left: 0 !important;
+}
+
+#state{
+  margin-left: 0 !important;
+}
+
+#city{
+  margin-left: 0 !important;
+}
+
+#sign-up-submit{
+  margin-left: 0 !important;
+}
+
+h1#logo{
+  margin: .4em !important;
+}
+
+h2.username{
+  margin: 0;
+}
+
+.container{
+  padding-left: 0em !important;
+  margin: 0 !important;
+}
+
+#header-things{
+  margin: 0;
+}
+
+.banner{
+  text-align: left;
+  padding-left: 0em;
+}
+
+form#search{
+  margin: 0 !important;
+  max-width: 60%;
+}
+
+form#log-out{
+  margin: 0 !important;
+}
+
+form#hearsay-generator{
+  border: 0;
+  max-width: 60%;
+}
+/* LOCATION BUTTON SECTION */
+.location-button{
+  max-width: 70%;
+}
+
+h5.location{
+  margin-left: 0px;
+  margin-bottom: 15px;
+}
+
+.top-bar{
+  position: relative;
+  margin-bottom: 50px;
+}
+
+img#icon{
+  width: 45px;
+  margin-top: -12px;
+}
+
+.option-bar{
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+.dropdown-menu{
+  padding-left: 5px;
+}
+a.option-button{
+  width: 160px
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  text-align: right;
+}
+i{
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.username{
+  position: relative;
+  display: inline-block;
+  float: left;
+}
+
+.bodyText{
+  padding-left: 15px;
+}
+
+/* HEARSAY SECTION */
+.hearsay{
+  width: 50%;
+  /*border: 1px solid lightgrey;*/
+  margin-bottom: 1em;
+  padding: .6em;
+  text-align: center;
+  border-radius: 5px;
+  /*margin: 0 auto;*/
+}
+.hearsay .username{
+  text-align: left;
+}
+
+form#comment-generator{
+  margin-left: 0 !important;
+  padding: 0 !important;
+}
+
+.hearsay .body{
+  text-align: left;
+}
+
+.hearsay .comment-username{
+  text-align: right;
+}
+
+.hearsay .comment-body{
+  text-align: right;
+}
+
+#comment-submit{
+  margin-left: .2em;
+}
+
+/* LEFT BAR SECTION */
+
+.cat-block{
+  margin: 0;
+  padding-top: 2.5% !important;
+  padding-left: .3em;
+  /*width: 100%;*/
+  /*padding: .2em;*/
+  /*border-radius: 5px;
+  border: 1px solid lightgrey;*/
+}
+
+.modal-backdrop{
+   opacity:0.9 !important;
+}
+
+
+.delete-hearsay{
+  text-align: right;
+}
+
+.edit-hearsay{
+  text-align: right;
+}
+
+.post-tools{
+  text-align: right;
+}
+/*.edit-hearsay{
+  float: left;
+  margin-left: .2em;
+  margin-right: .2em;
+}*/
+/*#cat-picture{
+  margin: 0 auto;
+  width: 25%;
+  position: fixed;
+  top: 0%;
+  left: auto;
+  /*margin-right: 0em;*/
+  /*bottom: auto;
+}*/
+
+.cat-block img{
+  max-width: 90%;
+  max-height: 40%;
+  padding-bottom: 1em;
+}
+.image-cat{
+  width: 30%;
+}
+
+/* TOP AREA SECTION */
+div.top-area{
+  width: 100%;
+  height: 250px;
+  margin: 0 auto;
+  margin-top: -20px;
+  background-color: rgba(244, 244, 244, 1);
+}
+
+div.container.post-hearsay{
+  width: 100%;
+  margin-top: -30px;
+}
+
+form#hearsay-generator.content-block{
+  width: 500px;
+  margin: 35px auto;
+  margin-left: 2em;
+}
+img.owl{
+  position: absolute;
+  width: 100px;
+  float: right;
+  right: 13em;
+  margin-top: -65px;
+}
+
+p.speech-text{
+  background-image: url(/images/bubble.png);
+  background-repeat: no-repeat;
+  float:right;
+  font-size: 30px;
+  margin-top: -160px;
+  padding-top: 35px;
+  padding-left: 10px;
+  z-index: 5;
+  color: white;
+  height: 130px;
+  width: 190px;
+}
+/* MAIN BODY SECTION */
+.body-area{
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+}
+.post-hearsay{
+  margin-left: 15px !important;
+}
+
+form#hearsay-generator{
+  margin: 0;
+}
+
+section#hearsay-list{
+  width: 100%;
+  margin: 0 auto;
+}
+
+div.hearsay.content-block{
+  width: 50%;
+  margin-left: 3em;
+}
+
+div.form-inline{
+
+}
+
+/* MEDIA QUERY SECTION */
+@media(min-width:480px) {
+    #wrapper {
+        padding-left:30%;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width:30%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 10px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+
+    .hearsay{
+      max-width: 70% !important;
+    }
+
+
+
+}

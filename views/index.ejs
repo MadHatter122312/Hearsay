@@ -4,8 +4,38 @@
   <% include ./partials/head %>
 </head>
 <body>
+  <% include ./partials/navbar %>
+  <% include ./partials/modals.ejs %>
+    <div class="top-area">
 
-<h1> Project Hearsay </h1>
 
+      <div class="container post-hearsay">
+        <form class="content-block" id="hearsay-generator">
+          <h4 class="create-hearsay"> Post a hearsay </h4>
+          <div class="form-group">
+            <textarea class="form-control" name="bodyText" rows="3" cols="30" placeholder="Type in your hearsay here"></textarea>
+          </div>
+          <div class="form-group">
+            <input class="btn btn-default" type="submit" name="name" value="Post Hearsay">
+          </div>
+        </form>
+        <img src="/images/owl.png" class="owl" />
+        <p class="speech-text">
+          Hearsay
+        </p>
+      </div>
+
+    </div>
+    <div class="body-area">
+        <section id="users">
+        </section>
+
+        <section id="hearsay-list">
+        </section>
+    </div>
+
+  <!-- </div> -->
+
+  <!-- </div> -->
 </body>
 </html>

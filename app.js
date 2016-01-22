@@ -2,43 +2,47 @@
 var express = require('express');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var loadUser = require('./middleware/loadUser');
 
 // Instance of Express
 var app = express();
 
+// Connect Mongoose to MongoDB
+var mongoPath = process.env.MONGOLAB_URI || 'mongodb://localhost/hearsays';
+mongoose.connect(mongoPath);
+
 // Setup EJS engine support
 app.set('view engine', 'ejs');
 
-// Connect Mongoose to MongoDB
-var mongoPath = 'mongodb://localhost/hearsays';
-mongoose.connect(mongoPath);
-
 
 // ~~~~~~~~~~MIDDLEWARE~~~~~~~~~~~~~ //
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(loadUser);
+
 // Custom Middleware for Accessing APIs
 app.use(function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
+
 // ~~~~~~~~~~IMPORT ROUTER~~~~~~~~~~~~~ //
 var indexRouter = require('./routes/index');
 var hearsaysRouter = require('./routes/api/hearsays');
 var usersRouter = require('./routes/users');
-var loadUser = require('./middleware/loadUser');
 
 // ~~~~~~~~~~MAP ROUTER~~~~~~~~~~~~~ //
 app.use('/', indexRouter);
 app.use('/api/hearsays', hearsaysRouter);
 app.use('/api/users', usersRouter);
-app.use(loadUser);
 
 // ~~~~~~~~~~LISTENER~~~~~~~~~~~~~ //
-var port = 8080;
+var port = process.env.PORT || 8080;
 app.listen(port, function() {
   console.log('Listening on '+ port);
 });
