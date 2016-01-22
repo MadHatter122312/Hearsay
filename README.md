@@ -1,4 +1,4 @@
-![Logo](http://i.imgur.com/4O0Ad2u.png "Logo")
+<img align="center" src="http://i.imgur.com/4O0Ad2u.png" alt="Logo">
 
 # PROJECT HEARSAY
 
