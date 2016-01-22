@@ -482,7 +482,7 @@ function setSearchHandler(){
 
 // ~~~~~~~~~~~~~~~~~~~~ LOGO ANIMATION ~~~~~~~~~~~~~~~~~~~~ //
 function fadeLogo(){
-  $('.big-icon').fadeOut(1);
+  $('.big-icon').fadeOut(1); //hide
   $('.big-icon').fadeIn(5000);
   $('img#owl-eyes').fadeOut(1).delay(3000);
   $('img#owl-eyes').fadeIn(100).fadeOut(100).fadeIn(100).delay(4000);
