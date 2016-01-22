@@ -59,7 +59,7 @@ function getAllHearsays(callback){
 function getCats(callback){
   callback = callback || function(){};
   $.ajax({
-    url: 'http://random.cat/meow',
+    url: 'https://random.cat/meow',
     success: function(data){
       var cats = data.cats || [];
       callback(cats);
