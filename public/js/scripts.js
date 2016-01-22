@@ -135,6 +135,19 @@ Handlebars.registerHelper('toHuman', function(date){
   return (hour - 5) + ':' + minute + ' ' + 'on' + ' ' + month + '/' + day + '/' + year;
 });
 
+// Render Option button for OP
+Handlebars.registerHelper('option_dropdown', function(hearsay){
+ var hearsayID = this._id;
+ var hearsayUser = this.username;
+ var cookieUser = $.cookie('username');
+ console.log(cookieUser);
+ if(hearsayUser === cookieUser){
+   return '<ul class="option-bar nav nav-pills"><li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a><ul class="dropdown-menu"><li><a class="option-button" style="padding:0"><i class="edit-hearsay fa fa-pencil-square-o" id="'+hearsayID+'" data-toggle="modal" data-target="#editHearsayModal"> &nbsp Edit Post</i></a> </li><li><a class="option-button" style="padding:0"><i class="delete-hearsay fa fa-times" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"> &nbsp Delete Post</i></a></li></ul></li></ul>';
+ } else {
+   console.log('You are not OP');
+ }
+});
+
 // Render Delete button through Handlebars
 Handlebars.registerHelper('delete_button', function(hearsay){
  var hearsayID = this._id;
@@ -142,7 +155,7 @@ Handlebars.registerHelper('delete_button', function(hearsay){
  var cookieUser = $.cookie('username');
  console.log(cookieUser);
  if(hearsayUser === cookieUser){
-   return '<i class="delete-hearsay fa fa-times" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"></i>'
+   return '<i class="delete-hearsay fa fa-times" id="'+hearsayID+'" data-toggle="modal" data-target="#dialog"> &nbsp Delete</i>'
  } else {
    console.log('You are not OP');
  }
@@ -155,7 +168,7 @@ Handlebars.registerHelper('edit_button', function(hearsay){
  var cookieUser = $.cookie('username');
  console.log(cookieUser);
  if(hearsayUser === cookieUser){
-   return '<i class="edit-hearsay fa fa-pencil-square-o" id="'+hearsayID+'" data-toggle="modal" data-target="#editHearsayModal"></i>'
+   return '<i class="edit-hearsay fa fa-pencil-square-o" id="'+hearsayID+'" data-toggle="modal" data-target="#editHearsayModal"> &nbsp Edit Post</i>'
  } else {
    console.log('Only OP can edit that');
  }
@@ -429,7 +442,7 @@ function setLogInFormHandler(){
 
 // Logout user form
 function setLogOutHandler(){
-  $('form#log-out').on('submit', function(e){
+  $('#logout-link').on('click', function(e){
     e.preventDefault();
     $.removeCookie('token');
     $.removeCookie('username');
@@ -473,6 +486,8 @@ $(function(){
     $('input#search-field').show();
     $('form#log-in').hide();
     $('#user-manager').hide();
+    $('#login-link').hide();
+    $('#signup-link').hide();
     getCats();
     setHearsayFormHandler();
     setCommentFormHandler();
@@ -489,7 +504,10 @@ $(function(){
     $('#hearsay-generator').hide();
     $('#users-template').hide();
     $('form#log-out').hide();
-    $('input#search-field').hide();
+    $('form.navbar-form').hide();
+    $('a.dropdown-toggle').hide();
+    $('#logout-link').hide();
+    $('.top-area').hide();
     setCreateUserFormHandler();
     setLogInFormHandler();
   }

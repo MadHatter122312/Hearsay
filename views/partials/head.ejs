@@ -11,38 +11,19 @@
 <script type="text/javascript" src="/js/citiesandstates.js"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
 
-
-<!--  Templates -->
-<script id="users-template" type="text/x-handlebars-template">
- {{#each users}}
-   <div class="hearsay content-block">
-     <h3> {{ this.username }} </h3>
-     <p>
-       {{ firstName }} {{ lastName }}
-     </p>
-     <p>
-       {{ email }}
-     </p>
-     <p>
-       {{ birthday }}
-     </p>
-     <p>
-       {{ location }}
-     </p>
-   </div>
- {{/each}}
-</script>
-
-
 <!--  Templates -->
 <script id="hearsays-template" type="text/x-handlebars-template">
 {{#each hearsays}}
   <div class="hearsay content-block">
-    <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }}<span id="post-tools">{{{delete_button this}}} {{{edit_button this}}}</span></h5>
-    <h2 class="username"> {{ this.username }} </h2>
-    <p class="body">
+    <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }}</h5>
+    <div class="top-bar">
+      <h2 class="username"> {{ this.username }} </h2>
+      {{{option_dropdown this}}}
+    </div>
+    <p class="body bodyText">
       {{ this.bodyText }}
     </p>
+    <hr>
     <form class="form-inline" id="comment-generator">
       <div class="form-inline">
         <input type="hidden" name="hearsay-id" value={{this._id}}>
@@ -50,6 +31,7 @@
         <input class="btn btn-default" type="submit" id="comment-submit">
       </div>
     </form>
+    <hr>
     {{#each this.comment}}
     <section class="comment-list">
         <div class="comment">
@@ -66,6 +48,21 @@
   {{#each hearsays}}
   <div class="hearsay content-block">
     <h5 class="location"> Posted in {{ this.location }} at {{ toHuman this.createdAt }}<span id="post-tools">{{{delete_button this}}} {{{edit_button this}}}</span></h5>
+    <ul class="nav nav-pills">
+      <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          Options <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            {{{delete_button this}}}
+          </li>
+          <li>
+            {{{edit_button this}}}
+          </li>
+        </ul>
+      </li>
+    </ul>
     <h2 class="username"> {{ this.username }} </h2>
     <p class="body">
       {{ this.bodyText }}
