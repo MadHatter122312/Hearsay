@@ -11,7 +11,7 @@ require('dotenv').load();
 var app = express();
 
 // Connect Mongoose to MongoDB
-var mongoPath = process.env.MONGOLAB_URI || 'mongodb://localhost/hearsays';
+var mongoPath = process.env.MONGOLAB_URI;
 mongoose.connect(mongoPath);
 
 // Setup EJS engine support
