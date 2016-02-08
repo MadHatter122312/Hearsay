@@ -11,7 +11,7 @@ require('dotenv').load();
 var app = express();
 
 // Connect Mongoose to MongoDB
-var mongoPath = process.env.MONGOLAB_URI;
+var mongoPath = 'mongodb://heroku_1qwbzvwc:apcpuagadacbkubr6h0mgag1sf@ds059185.mongolab.com:59185/heroku_1qwbzvwc';
 mongoose.connect(mongoPath);
 
 // Setup EJS engine support
