@@ -10,8 +10,14 @@ require('dotenv').load();
 // Instance of Express
 var app = express();
 
+// Old Connect Mongoose to MongoDB
+var mongoPath = process.env.MONGOLAB_URI || 'mongodb://localhost/hearsays';
+
+
+// Working on heroku
 // Connect Mongoose to MongoDB
-var mongoPath = 'mongodb://heroku_1qwbzvwc:apcpuagadacbkubr6h0mgag1sf@ds059185.mongolab.com:59185/heroku_1qwbzvwc';
+// var mongoPath = 'mongodb://heroku_1qwbzvwc:apcpuagadacbkubr6h0mgag1sf@ds059185.mongolab.com:59185/heroku_1qwbzvwc';
+//herku can't find the process.env so we had to take the hardwired url and insert it here...now it breaks my local
 mongoose.connect(mongoPath);
 
 // Setup EJS engine support
