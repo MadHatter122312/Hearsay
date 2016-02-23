@@ -12,8 +12,6 @@ Got a secret? Something you need to get off your chest? Create a Project Hearsay
     ![Logging In](http://i.imgur.com/gRMqk2z.gif "Logging in")
   - As a user, I was able to view and respond to other Hearsays.
     ![Commenting](http://i.imgur.com/AMA1Diz.gif "Posting a comment")
-  - As a user, if I need a break, I can view some randomly generated cat pictures!
-    ![Cats!](http://i.imgur.com/QiwF3ir.gif "Cats!")
 
 3. TECHNOLOGIES
   - Node.js
@@ -21,7 +19,7 @@ Got a secret? Something you need to get off your chest? Create a Project Hearsay
   - JavaScript/jQuery
   - MongoDB
   - Bootstrap
-  
+
 4. INSTALLATION INSTRUCTIONS AND REQUIREMENTS
   Hearsay has the following npm dependencies:
     -bcrypt
@@ -38,6 +36,3 @@ Got a secret? Something you need to get off your chest? Create a Project Hearsay
 ​
   Run npm install on your bash console to obtain the required npm
 ​
-5. URL
-  
-  https://owl-nightmares.herokuapp.com/
